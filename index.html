@@ -1,0 +1,3119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CEFM UNSCH | Centro de Estudiantes de Ciencias Físico Matemáticas</title>
+  <meta name="description" content="Centro de Estudiantes de Ciencias Físico Matemáticas - Universidad Nacional de San Cristóbal de Huamanga, Ayacucho, Perú.">
+  <!-- FAVICON -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
+  <link rel="apple-touch-icon" href="assets/logo.png">
+  <!-- SEO y Vista Previa en Google / Redes Sociales -->
+  <meta name="description" content="Centro de Estudiantes de Ciencias Físico Matemáticas (CEFM) de la UNSCH, Ayacucho, Perú. Representación estudiantil, eventos, asesorías y biblioteca académica.">
+  <meta name="keywords" content="CEFM, Ciencias Físico Matemáticas, UNSCH, Ayacucho, centro de estudiantes, matemática, física">
+  <meta name="author" content="CEFM UNSCH">
+
+  <!-- Open Graph (vista previa en Google, Facebook, WhatsApp) -->
+  <meta property="og:title" content="CEFM UNSCH | Centro de Estudiantes de Ciencias Físico Matemáticas">
+  <meta property="og:description" content="Centro de Estudiantes de Ciencias Físico Matemáticas de la UNSCH, Ayacucho. Eventos, asesorías, biblioteca académica y representación estudiantil.">
+  <meta property="og:image" content="assets/logo.png">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_PE">
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <style>
+    /* ============================================================
+       VARIABLES GLOBALES DE COLOR Y TIPOGRAFÍA
+       ============================================================ */
+    :root {
+      --oro:        #C9922B;
+      --oro-claro:  #F0C060;
+      --negro:      #0A0A0A;
+      --carbon:     #111518;
+      --gris-oscuro:#1C2128;
+      --gris-medio: #2D3640;
+      --gris-claro: #8A9BAD;
+      --blanco:     #F4F1EC;
+      --acento:     #E05A1C;    /* naranja mineral */
+      --roca:       #3A4A56;
+      --sombra:     rgba(0,0,0,0.7);
+    }
+
+    /* ============================================================
+       RESET & BASE
+       ============================================================ */
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; font-size:16px; }
+    body {
+      font-family: 'Barlow', sans-serif;
+      background: var(--carbon);
+      color: var(--blanco);
+      overflow-x: hidden;
+    }
+    img { max-width:100%; display:block; }
+    a { color:inherit; text-decoration:none; }
+    ul { list-style:none; }
+
+    /* ============================================================
+       PRECARGA / LOADING SCREEN
+       ============================================================ */
+    #preloader {
+      position: fixed; inset:0; z-index:9999;
+      background: var(--negro);
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      transition: opacity .6s ease, visibility .6s ease;
+    }
+    #preloader.hidden { opacity:0; visibility:hidden; pointer-events:none; }
+
+    .preloader-logo {
+      width:100px; height:100px; margin-bottom:2rem;
+      position:relative;
+    }
+    .preloader-logo svg { width:100%; height:100%; }
+
+    .pick-icon {
+      animation: spin 1.8s cubic-bezier(.68,-.55,.27,1.55) infinite;
+      transform-origin: center;
+    }
+    @keyframes spin {
+      0%   { transform: rotate(-30deg); }
+      50%  { transform: rotate(30deg); }
+      100% { transform: rotate(-30deg); }
+    }
+
+    .preloader-title {
+      font-family:'Bebas Neue', sans-serif;
+      font-size: clamp(1.6rem, 5vw, 2.8rem);
+      letter-spacing:.3em;
+      color: var(--oro);
+      margin-bottom:.5rem;
+    }
+    .preloader-sub {
+        font-size:.75rem;
+        letter-spacing:.25em;
+        color: var(--gris-claro);
+        text-transform:uppercase;
+        margin-bottom:2rem;
+        text-align:center;        /* 👈 esto centra el texto */
+        padding: 0 2rem;          /* 👈 esto evita que toque los bordes */
+        }
+    .loader-bar-wrap {
+      width:260px; height:3px;
+      background: var(--gris-oscuro);
+      border-radius:3px; overflow:hidden;
+    }
+    .loader-bar {
+      height:100%;
+      background: linear-gradient(90deg, var(--oro), var(--acento));
+      width:0;
+      animation: load 2.2s ease forwards;
+    }
+    @keyframes load { to { width:100%; } }
+
+    /* ============================================================
+       BARRA DE NAVEGACIÓN
+       ============================================================ */
+    nav {
+      position: fixed; top:0; left:0; right:0; z-index:900;
+      display:flex; align-items:center; justify-content:space-between;
+      padding:.9rem 4%;
+      background: rgba(10,10,10,.9);
+      backdrop-filter: blur(12px);
+      border-bottom:1px solid rgba(201,146,43,.18);
+      transition: background .3s;
+    }
+    .nav-brand {
+      display:flex; align-items:center; gap:.75rem;
+    }
+    .nav-logo-circle {
+      width:42px; height:42px;
+      border-radius:50%;
+      border:2px solid var(--oro);
+      display:flex; align-items:center; justify-content:center;
+      background: var(--gris-oscuro);
+      flex-shrink:0;
+    }
+    .nav-logo-circle svg { width:22px; height:22px; }
+    .nav-brand-text { line-height:1.15; }
+    .nav-brand-text strong {
+      font-family:'Bebas Neue', sans-serif;
+      font-size:1.15rem;
+      letter-spacing:.1em;
+      color: var(--oro);
+      display:block;
+    }
+    .nav-brand-text span {
+      font-size:.6rem;
+      letter-spacing:.15em;
+      color: var(--gris-claro);
+      text-transform:uppercase;
+    }
+
+    .nav-menu {
+      display:flex; gap:2rem; align-items:center;
+    }
+    .nav-menu a {
+      font-size:.78rem;
+      font-weight:600;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color: var(--gris-claro);
+      transition: color .2s;
+      position:relative;
+      padding-bottom:4px;
+    }
+    .nav-menu a::after {
+      content:'';
+      position:absolute; left:0; bottom:0;
+      width:0; height:2px;
+      background: var(--oro);
+      transition: width .3s;
+    }
+    .nav-menu a:hover { color: var(--blanco); }
+    .nav-menu a:hover::after { width:100%; }
+
+    .nav-cta {
+      background: var(--oro);
+      color: var(--negro) !important;
+      padding:.45rem 1.2rem !important;
+      border-radius:2px;
+      font-weight:700 !important;
+    }
+    .nav-cta:hover { background: var(--oro-claro) !important; color:var(--negro)!important; }
+    .nav-cta::after { display:none !important; }
+
+    /* Hamburger */
+    .hamburger {
+      display:none; flex-direction:column; gap:5px;
+      background:none; border:none; cursor:pointer; padding:4px;
+    }
+    .hamburger span {
+      display:block; width:26px; height:2px;
+      background: var(--blanco);
+      transition: transform .3s, opacity .3s;
+    }
+    .hamburger.active span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2){ opacity:0; }
+    .hamburger.active span:nth-child(3){ transform:translateY(-7px) rotate(-45deg); }
+
+    .mobile-menu {
+      display:none; position:fixed;
+      top:65px; left:0; right:0;
+      background: rgba(10,10,10,.97);
+      backdrop-filter:blur(14px);
+      padding:2rem 2rem 2.5rem;
+      flex-direction:column; gap:1.4rem;
+      z-index:899;
+      border-bottom:1px solid var(--gris-oscuro);
+    }
+    .mobile-menu.open { display:flex; }
+    .mobile-menu a {
+      font-size:1.1rem;
+      font-weight:600;
+      letter-spacing:.1em;
+      text-transform:uppercase;
+      color: var(--gris-claro);
+      padding:.5rem 0;
+      border-bottom:1px solid var(--gris-oscuro);
+      transition: color .2s;
+    }
+    .mobile-menu a:hover { color: var(--oro); }
+
+    /* ============================================================
+       HERO / PORTADA
+       ============================================================ */
+    #hero {
+      min-height:100vh;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      text-align:center;
+      position:relative;
+      overflow:hidden;
+      padding: 100px 6% 60px;
+    }
+
+    /* Fondo hero: sustituir la URL con tu foto real */
+    .hero-bg {
+      position:absolute; inset:0; z-index:0;
+      background:
+        linear-gradient(165deg, rgba(10,10,10,.85) 0%, rgba(28,33,40,.7) 100%),
+        url('assets/portada.webp') center top/cover no-repeat;
+    }
+        /*
+        ┌─────────────────────────────────────────────────────┐
+        │  📸 FOTO DE PORTADA                                 │
+        │  Reemplaza la siguiente URL con la URL de tu foto   │
+        │  de fondo del hero. Debe ser una imagen horizontal  │
+        │  de alta resolución (mínimo 1920×1080px).           │
+        │  Ejemplo: url('img/portada.jpg')                    │
+        └─────────────────────────────────────────────────────┘
+        */
+
+    /* Partículas / textura mineral */
+    .hero-bg::after {
+      content:'';
+      position:absolute; inset:0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9922B' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E") repeat;
+    }
+
+    .hero-eyebrow {
+      position:relative; z-index:1;
+      font-size:.7rem;
+      letter-spacing:.4em;
+      text-transform:uppercase;
+      color: var(--oro);
+      margin-bottom:1.2rem;
+      opacity:0;
+      animation: fadeUp .8s ease .3s forwards;
+    }
+    .hero-title {
+      position:relative; z-index:1;
+      font-family:'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 9vw, 8rem);
+      line-height:.92;
+      letter-spacing:.03em;
+      color: var(--blanco);
+      margin-bottom:.5rem;
+      opacity:0;
+      animation: fadeUp .9s ease .5s forwards;
+    }
+    .hero-title .highlight {
+      color: transparent;
+      -webkit-text-stroke:2px var(--oro);
+    }
+    .hero-subtitle {
+      position:relative; z-index:1;
+      font-size: clamp(.85rem, 2vw, 1.1rem);
+      font-weight:300;
+      letter-spacing:.25em;
+      text-transform:uppercase;
+      color: var(--gris-claro);
+      margin-bottom:2.5rem;
+      opacity:0;
+      animation: fadeUp .9s ease .7s forwards;
+    }
+    .hero-btns {
+      position:relative; z-index:1;
+      display:flex; gap:1rem; flex-wrap:wrap; justify-content:center;
+      opacity:0;
+      animation: fadeUp .9s ease .9s forwards;
+    }
+    .btn-primary {
+      padding:.85rem 2.2rem;
+      background: var(--oro);
+      color: var(--negro);
+      font-weight:700;
+      font-size:.85rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      border:none; border-radius:2px; cursor:pointer;
+      transition: background .25s, transform .2s;
+    }
+    .btn-primary:hover { background:var(--oro-claro); transform:translateY(-2px); }
+    .btn-ghost {
+      padding:.85rem 2.2rem;
+      background:transparent;
+      color: var(--blanco);
+      font-weight:600;
+      font-size:.85rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      border:1px solid rgba(255,255,255,.3);
+      border-radius:2px; cursor:pointer;
+      transition: border-color .25s, color .25s;
+    }
+    .btn-ghost:hover { border-color:var(--oro); color:var(--oro); }
+
+    .hero-scroll {
+      position:absolute; bottom:2rem; left:50%; transform:translateX(-50%);
+      z-index:1; display:flex; flex-direction:column; align-items:center; gap:.5rem;
+      opacity:0; animation: fadeIn 1s ease 1.4s forwards;
+    }
+    .hero-scroll span {
+      font-size:.6rem; letter-spacing:.3em; text-transform:uppercase; color:var(--gris-claro);
+    }
+    .scroll-line {
+      width:1px; height:50px;
+      background: linear-gradient(to bottom, var(--oro), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%,100%{ opacity:.3; transform:scaleY(1); }
+      50%{ opacity:1; transform:scaleY(1.2); }
+    }
+
+    /* Badges hero */
+    .hero-badges {
+      position:relative; z-index:1;
+      display:flex; gap:2rem; flex-wrap:wrap; justify-content:center;
+      margin-bottom:2rem;
+      opacity:0; animation: fadeUp .9s ease 1.1s forwards;
+    }
+    .hero-badge {
+      display:flex; align-items:center; gap:.5rem;
+      font-size:.72rem; letter-spacing:.1em; color:var(--gris-claro);
+    }
+    .hero-badge i { color:var(--oro); font-size:1rem; }
+
+    /* ============================================================
+       ANIMACIONES GLOBALES
+       ============================================================ */
+    @keyframes fadeUp {
+      from { opacity:0; transform:translateY(28px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity:0; } to { opacity:1; }
+    }
+
+    /* Reveal on scroll */
+    .reveal {
+      opacity:0; transform:translateY(36px);
+      transition: opacity .7s ease, transform .7s ease;
+    }
+    .reveal.visible { opacity:1; transform:translateY(0); }
+
+    /* ============================================================
+       SECCIONES GENÉRICAS
+       ============================================================ */
+    section { padding:6rem 6%; }
+    .section-label {
+      font-size:.65rem;
+      letter-spacing:.45em;
+      text-transform:uppercase;
+      color: var(--oro);
+      margin-bottom:.75rem;
+    }
+    .section-title {
+      font-family:'Bebas Neue', sans-serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height:1;
+      color: var(--blanco);
+      margin-bottom:1rem;
+    }
+    .section-desc {
+      font-size:.95rem;
+      font-weight:300;
+      line-height:1.75;
+      color: var(--gris-claro);
+      max-width:640px;
+      margin-bottom:3rem;
+    }
+    .divider {
+      width:60px; height:3px;
+      background: linear-gradient(90deg, var(--oro), var(--acento));
+      margin-bottom:2rem;
+    }
+
+    /* ============================================================
+       ESTADÍSTICAS / COUNTERS
+       ============================================================ */
+    #stats {
+      background: var(--gris-oscuro);
+      padding:4rem 6%;
+      border-top:1px solid rgba(201,146,43,.15);
+      border-bottom:1px solid rgba(201,146,43,.15);
+    }
+    .stats-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px,1fr));
+      gap:2rem;
+      text-align:center;
+    }
+    .stat-item {}
+    .stat-number {
+      font-family:'Bebas Neue', sans-serif;
+      font-size: clamp(3rem,6vw,5rem);
+      color: var(--oro);
+      line-height:1;
+    }
+    .stat-label {
+      font-size:.72rem;
+      letter-spacing:.2em;
+      text-transform:uppercase;
+      color: var(--gris-claro);
+      margin-top:.4rem;
+    }
+
+    /* ============================================================
+       SOBRE NOSOTROS
+       ============================================================ */
+    #sobre {
+      background: var(--carbon);
+      display:grid; grid-template-columns:1fr 1fr; gap:5rem;
+      align-items:center;
+    }
+    .sobre-img-wrap {
+      position:relative;
+    }
+    .sobre-img-main {
+      width:100%; height:420px; object-fit:cover;
+      border-radius:2px;
+      /*
+      ┌────────────────────────────────────────────────────────┐
+      │  📸 FOTO "SOBRE NOSOTROS"                              │
+      │  Reemplaza el src de esta etiqueta <img> con la ruta  │
+      │  de tu foto. Ej: src="img/sobre.jpg"                  │
+      │  Tamaño recomendado: 800×550px                         │
+      └────────────────────────────────────────────────────────┘
+      */
+    }
+    .sobre-img-badge {
+      position:absolute; bottom:-24px; right:-24px;
+      width:130px; height:130px;
+      background: var(--oro);
+      border-radius:50%;
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      text-align:center;
+      padding:1rem;
+      box-shadow:0 8px 32px rgba(0,0,0,.4);
+    }
+    .sobre-img-badge strong {
+      font-family:'Bebas Neue', sans-serif;
+      font-size:2.2rem; line-height:1;
+      color: var(--negro);
+    }
+    .sobre-img-badge span {
+      font-size:.55rem; letter-spacing:.12em; text-transform:uppercase;
+      color: var(--negro); margin-top:.15rem;
+    }
+    .sobre-features {
+      display:grid; grid-template-columns:1fr 1fr; gap:1.2rem; margin-top:2rem;
+    }
+    .sobre-feat {
+      display:flex; gap:.75rem; align-items:flex-start;
+      padding:1rem;
+      background: var(--gris-oscuro);
+      border-left:3px solid var(--oro);
+    }
+    .sobre-feat-icon { font-size:1.5rem; flex-shrink:0; }
+    .sobre-feat-text strong { display:block; font-size:.82rem; color:var(--blanco); margin-bottom:.2rem; }
+    .sobre-feat-text span { font-size:.75rem; color:var(--gris-claro); line-height:1.5; }
+
+    /* ============================================================
+       NOTICIAS
+       ============================================================ */
+    #noticias { background: var(--negro); }
+    .noticias-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
+      gap:1.5rem;
+    }
+
+    /* ─────────────────────────────────────────────────────────
+       🗞️ CÓMO AGREGAR UNA NOTICIA
+       ─────────────────────────────────────────────────────────
+       Copia el bloque <article class="noticia-card"> completo
+       y pégalo dentro de <div class="noticias-grid">.
+       Cambia:
+         · data-categoria  → categoría de la noticia
+         · La URL dentro de style="background-image:url(...)"
+           → ruta de tu foto (ej: url('img/noticias/foto1.jpg'))
+         · <span class="noticia-cat"> → nombre de categoría
+         · <span class="noticia-fecha"> → fecha
+         · <h3> → título de la noticia
+         · <p> → resumen (2-3 líneas)
+    ──────────────────────────────────────────────────────────── */
+
+    .noticia-card {
+      background: var(--gris-oscuro);
+      border-radius:2px;
+      overflow:hidden;
+      display:flex; flex-direction:column;
+      transition: transform .3s, box-shadow .3s;
+      cursor:pointer;
+    }
+    .noticia-card:hover {
+      transform:translateY(-6px);
+      box-shadow:0 20px 50px rgba(0,0,0,.5);
+    }
+    .noticia-img {
+      height:210px;
+      background: var(--roca) center/cover no-repeat;
+      position:relative;
+      overflow:hidden;
+    }
+    .noticia-img::after {
+      content:'';
+      position:absolute; inset:0;
+      background:linear-gradient(to top, rgba(0,0,0,.6), transparent);
+    }
+    .noticia-body { padding:1.5rem; flex:1; display:flex; flex-direction:column; }
+    .noticia-meta { display:flex; gap:.75rem; align-items:center; margin-bottom:.75rem; }
+    .noticia-cat {
+      font-size:.6rem; letter-spacing:.2em; text-transform:uppercase;
+      background:var(--oro); color:var(--negro);
+      padding:.2rem .6rem; border-radius:1px; font-weight:700;
+    }
+    .noticia-fecha { font-size:.7rem; color:var(--gris-claro); }
+    .noticia-card h3 {
+      font-family:'Barlow', sans-serif;
+      font-size:1.05rem; font-weight:700;
+      line-height:1.4; color:var(--blanco);
+      margin-bottom:.6rem;
+    }
+    .noticia-card p {
+      font-size:.83rem; color:var(--gris-claro); line-height:1.6;
+      flex:1;
+    }
+    .noticia-link {
+      display:inline-flex; align-items:center; gap:.4rem;
+      margin-top:1rem;
+      font-size:.75rem; font-weight:700;
+      letter-spacing:.1em; text-transform:uppercase;
+      color:var(--oro);
+      transition: gap .2s;
+    }
+    .noticia-link:hover { gap:.7rem; }
+
+    /* ============================================================
+       EVENTOS
+       ============================================================ */
+    #eventos { background: var(--carbon); }
+    .eventos-list { display:flex; flex-direction:column; gap:1.5rem; }
+
+    /* ─────────────────────────────────────────────────────────
+       📅 CÓMO AGREGAR UN EVENTO
+       ─────────────────────────────────────────────────────────
+       Copia el bloque <div class="evento-item"> completo
+       y pégalo dentro de <div class="eventos-list">.
+       Cambia:
+         · <span class="evento-dia"> → número del día
+         · <span class="evento-mes"> → mes abreviado
+         · <span class="evento-hora"> → hora del evento
+         · <h3> → nombre del evento
+         · <p> → descripción corta
+         · <span class="evento-lugar"> → lugar del evento
+         · La URL en style="background-image:url(...)"
+           → foto del evento
+    ──────────────────────────────────────────────────────────── */
+
+    .evento-item {
+      display:grid; grid-template-columns:80px 1fr auto;
+      gap:1.5rem; align-items:center;
+      padding:1.5rem;
+      background: var(--gris-oscuro);
+      border-left:4px solid var(--oro);
+      transition: border-color .3s, background .3s;
+    }
+    .evento-item:hover {
+      border-color:var(--acento);
+      background: var(--gris-medio);
+    }
+    .evento-fecha-box {
+      text-align:center;
+    }
+    .evento-dia {
+      display:block;
+      font-family:'Bebas Neue', sans-serif;
+      font-size:3rem; line-height:1;
+      color:var(--oro);
+    }
+    .evento-mes {
+      display:block;
+      font-size:.6rem; letter-spacing:.2em;
+      text-transform:uppercase; color:var(--gris-claro);
+    }
+    .evento-info h3 {
+      font-size:1.05rem; font-weight:700;
+      color:var(--blanco); margin-bottom:.35rem;
+    }
+    .evento-info p { font-size:.82rem; color:var(--gris-claro); line-height:1.5; margin-bottom:.5rem; }
+    .evento-meta { display:flex; gap:1rem; flex-wrap:wrap; }
+    .evento-hora, .evento-lugar {
+      font-size:.68rem; letter-spacing:.1em;
+      text-transform:uppercase; color:var(--gris-claro);
+      display:flex; align-items:center; gap:.3rem;
+    }
+    .evento-img {
+      width:100px; height:80px;
+      object-fit:cover; border-radius:1px;
+      background: var(--roca) center/cover;
+      /*
+      ┌────────────────────────────────────────────────────────┐
+      │  📸 FOTO DEL EVENTO                                    │
+      │  Reemplaza el background-image con la URL de tu foto  │
+      │  Ej: url('img/eventos/congreso.jpg')                   │
+      └────────────────────────────────────────────────────────┘
+      */
+    }
+
+    /* ============================================================
+       LOGROS / GALERÍA
+       ============================================================ */
+    #logros { background: var(--negro); }
+    .logros-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+      gap:1.5rem;
+    }
+
+    /* ─────────────────────────────────────────────────────────
+       🏆 CÓMO AGREGAR UN LOGRO
+       Las instrucciones están en el HTML, dentro de la sección
+       <section id="logros">. No hace falta tocar este estilo.
+    ──────────────────────────────────────────────────────────── */
+
+    .logro-card {
+      background: var(--gris-oscuro);
+      padding:2rem;
+      position:relative; overflow:hidden;
+      border-radius:2px;
+      transition: transform .3s, box-shadow .3s;
+    }
+    .logro-card:hover { transform:translateY(-4px); box-shadow:0 16px 40px rgba(0,0,0,.4); }
+    .logro-card::before {
+      content:'';
+      position:absolute; top:0; left:0; right:0;
+      height:3px;
+      background:linear-gradient(90deg, var(--oro), var(--acento));
+    }
+    .logro-icon {
+      font-size:2.5rem; margin-bottom:1rem;
+    }
+    .logro-card h3 {
+      font-size:1rem; font-weight:700; color:var(--blanco);
+      margin-bottom:.5rem;
+    }
+    .logro-card p { font-size:.82rem; color:var(--gris-claro); line-height:1.6; }
+    .logro-año {
+      display:inline-block; margin-top:1rem;
+      font-size:.65rem; letter-spacing:.2em; text-transform:uppercase;
+      color:var(--oro); background:rgba(201,146,43,.1);
+      padding:.25rem .7rem; border-radius:1px;
+    }
+
+    /* ── GANADORES DE CADA LOGRO ── */
+    .logro-ganadores {
+      list-style:none; margin:1rem 0 0; padding:.85rem 0 0;
+      border-top:1px solid rgba(201,146,43,.2);
+    }
+    .logro-ganadores::before {
+      content:'Ganadores';
+      display:block; margin-bottom:.5rem;
+      font-size:.62rem; letter-spacing:.2em; text-transform:uppercase;
+      color:var(--oro);
+    }
+    .logro-ganadores li {
+      position:relative; padding-left:1.1rem; margin-bottom:.3rem;
+      font-size:.8rem; color:var(--blanco); line-height:1.4;
+    }
+    .logro-ganadores li::before {
+      content:'\f007'; font-family:'Font Awesome 6 Free'; font-weight:900;
+      position:absolute; left:0; top:.1rem;
+      font-size:.62rem; color:var(--oro);
+    }
+
+    /* ── FILTRO DE LOGROS POR AÑO ── */
+    .logros-filtro {
+      display:flex; flex-wrap:wrap; gap:.6rem;
+      margin-bottom:2rem;
+    }
+    .filtro-btn {
+      background:transparent; color:var(--gris-claro);
+      border:1px solid rgba(201,146,43,.35);
+      padding:.55rem 1.3rem; border-radius:2px;
+      font-family:inherit; font-size:.75rem; font-weight:600;
+      letter-spacing:.15em; text-transform:uppercase;
+      cursor:pointer; transition: background .2s, color .2s, border-color .2s;
+    }
+    .filtro-btn:hover { border-color:var(--oro); color:var(--oro); }
+    .filtro-btn.activo { background:var(--oro); border-color:var(--oro); color:var(--negro); }
+    .filtro-select { appearance:none; -webkit-appearance:none; }
+    .filtro-select option { background:var(--gris-oscuro); color:var(--blanco); }
+    .logro-card.oculto { display:none; }
+    .logro-card.aparecer { animation: logroAparecer .4s ease; }
+    @keyframes logroAparecer {
+      from { opacity:0; transform:translateY(12px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+    @media (max-width:520px) {
+      .logros-filtro { gap:.5rem; }
+      .filtro-btn { flex:1 1 calc(33.333% - .5rem); padding:.6rem .5rem; text-align:center; }
+    }
+
+    /* ============================================================
+       GALERÍA DE FOTOS
+       ============================================================ */
+    #galeria { background: var(--carbon); }
+
+    /* ─────────────────────────────────────────────────────────
+       📷 CÓMO AGREGAR FOTOS A LA GALERÍA
+       Las instrucciones están en el HTML, dentro de la sección
+       <section id="galeria">. No hace falta tocar este estilo.
+    ──────────────────────────────────────────────────────────── */
+
+    /* Cada evento es un grupo con su título y sus fotos */
+    .galeria-evento { margin-bottom:3rem; }
+    .galeria-evento:last-child { margin-bottom:0; }
+    .galeria-evento.oculto { display:none; }
+    .galeria-evento.aparecer { animation: logroAparecer .4s ease; }
+    .galeria-evento-cabecera {
+      display:flex; align-items:baseline; justify-content:space-between;
+      gap:1rem; margin-bottom:1rem; padding-bottom:.6rem;
+      border-bottom:1px solid rgba(201,146,43,.2);
+    }
+    .galeria-evento-titulo {
+      font-size:1rem; font-weight:700; color:var(--blanco);
+      letter-spacing:.05em; text-transform:uppercase; margin:0;
+    }
+    .galeria-evento-cantidad {
+      font-size:.68rem; letter-spacing:.15em; text-transform:uppercase;
+      color:var(--oro); white-space:nowrap;
+    }
+
+    /* Mosaico justificado: filas de igual altura, cada foto completa
+       en su proporción real (sin recortes ni huecos).
+       --r = ancho/alto de la foto (lo calcula el script solo). */
+    .galeria-fotos {
+      --alto: 230px;
+      display:flex; flex-wrap:wrap; align-items:flex-start; gap:.6rem;
+    }
+    .galeria-fotos::after { content:''; flex-grow:999999; }
+    .galeria-fotos img {
+      --r: 1.5;
+      flex-grow: var(--r);
+      flex-basis: calc(var(--r) * var(--alto));
+      width:0; height:auto; aspect-ratio: var(--r);
+      object-fit:cover; border-radius:2px;
+      background:var(--roca); cursor:zoom-in;
+      transition: transform .3s, filter .3s, box-shadow .3s;
+    }
+    .galeria-fotos img:hover,
+    .galeria-fotos img:focus-visible {
+      filter:brightness(1.08); transform:translateY(-3px);
+      box-shadow:0 10px 30px rgba(0,0,0,.45);
+    }
+    .galeria-fotos img:focus-visible { outline:2px solid var(--oro); outline-offset:2px; }
+
+    /* ── VISOR DE FOTOS (LIGHTBOX) ── */
+    .lightbox {
+      position:fixed; inset:0; z-index:9999;
+      background:rgba(5,6,8,.95);
+      display:flex; flex-direction:column;
+      align-items:center; justify-content:center;
+      padding:4rem 4.5rem 2rem;
+      opacity:0; visibility:hidden;
+      transition: opacity .3s, visibility .3s;
+    }
+    .lightbox.open { opacity:1; visibility:visible; }
+    .lightbox-figure {
+      margin:0; max-width:1100px; width:100%;
+      display:flex; flex-direction:column; align-items:center;
+    }
+    .lightbox-img {
+      max-width:100%; max-height:calc(100vh - 11rem);
+      object-fit:contain; border-radius:2px;
+      box-shadow:0 10px 40px rgba(0,0,0,.6);
+      transform:scale(.96); transition: transform .3s;
+      user-select:none; -webkit-user-drag:none;
+    }
+    .lightbox.open .lightbox-img { transform:scale(1); }
+    .lightbox-caption {
+      margin-top:1rem; width:100%;
+      display:flex; justify-content:space-between; align-items:center; gap:1rem;
+      border-top:2px solid var(--oro); padding-top:.75rem;
+    }
+    .lightbox-caption span {
+      font-size:.85rem; letter-spacing:.1em;
+      text-transform:uppercase; color:var(--blanco);
+    }
+    .lightbox-counter {
+      font-size:.75rem; color:var(--oro); white-space:nowrap;
+    }
+    .lightbox-btn {
+      position:absolute; background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.15); color:var(--blanco);
+      width:48px; height:48px; border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.1rem; cursor:pointer;
+      transition: background .2s, color .2s;
+    }
+    .lightbox-btn:hover { background:var(--oro); color:var(--negro); }
+    .lightbox-close { top:1rem; right:1rem; }
+    .lightbox-prev  { left:1rem;  top:50%; transform:translateY(-50%); }
+    .lightbox-next  { right:1rem; top:50%; transform:translateY(-50%); }
+
+    /* ============================================================
+       DIRECTIVA / EQUIPO
+       ============================================================ */
+    #directiva { background: var(--negro); }
+    .directiva-grid {
+      display:grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+      gap:2rem;
+    }
+
+    /* ─────────────────────────────────────────────────────────
+       👤 CÓMO AGREGAR UN MIEMBRO DE LA DIRECTIVA
+       ─────────────────────────────────────────────────────────
+       Copia el bloque <div class="miembro-card"> completo
+       y pégalo dentro de <div class="directiva-grid">.
+       Cambia:
+         · style="background-image:url(...)" → foto del miembro
+         · <h3> → nombre completo
+         · <span class="miembro-cargo"> → cargo
+         · <span class="miembro-ciclo"> → ciclo académico
+    ──────────────────────────────────────────────────────────── */
+
+    .miembro-card {
+      text-align:center;
+      transition: transform .3s;
+    }
+    .miembro-card:hover { transform:translateY(-5px); }
+    .miembro-foto {
+      width:160px; height:160px;
+      border-radius:50%;
+      margin:0 auto 1.2rem;
+      background:var(--roca) center/cover;
+      border:3px solid var(--gris-oscuro);
+      position:relative;
+      transition:border-color .3s;
+      /*
+      ┌────────────────────────────────────────────────────────┐
+      │  📸 FOTO DEL MIEMBRO                                   │
+      │  Reemplaza background-image con la foto del miembro   │
+      │  Ej: url('img/directiva/presidente.jpg')               │
+      └────────────────────────────────────────────────────────┘
+      */
+    }
+    .miembro-card:hover .miembro-foto { border-color:var(--oro); }
+    .miembro-card h3 { font-size:.95rem; font-weight:700; color:var(--blanco); margin-bottom:.3rem; }
+    .miembro-cargo {
+      display:block; font-size:.68rem; letter-spacing:.15em;
+      text-transform:uppercase; color:var(--oro); margin-bottom:.25rem;
+    }
+    .miembro-ciclo { font-size:.73rem; color:var(--gris-claro); }
+
+    /* ============================================================
+       LA CARRERA (Ciencias Físico Matemáticas)
+       ============================================================ */
+    #carrera {
+      background: linear-gradient(135deg, var(--gris-oscuro) 0%, var(--carbon) 100%);
+    }
+    .carrera-inner {
+      display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;
+    }
+    .carrera-img {
+      width:100%; height:380px; object-fit:cover; border-radius:2px;
+      position:relative;
+      background: var(--roca) center/cover;
+      /*
+      ┌────────────────────────────────────────────────────────┐
+      │  📸 FOTO "LA CARRERA"                                  │
+      │  Cambia background-image a la URL de tu foto           │
+      │  Ej: url('img/carrera.jpg')                            │
+      └────────────────────────────────────────────────────────┘
+      */
+    }
+    .carrera-tags { display:flex; gap:.75rem; flex-wrap:wrap; margin-top:1.5rem; }
+    .tag {
+      padding:.35rem .85rem;
+      background:rgba(201,146,43,.1);
+      border:1px solid rgba(201,146,43,.3);
+      color:var(--oro);
+      font-size:.68rem; letter-spacing:.15em; text-transform:uppercase;
+      border-radius:1px;
+    }
+
+    /* ============================================================
+       UNIVERSIDAD
+       ============================================================ */
+    #universidad { background: var(--negro); }
+    .univ-inner {
+      display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;
+    }
+    .univ-img {
+      width:100%; height:380px; object-fit:cover;
+      border-radius:2px;
+      background: var(--roca) center/cover;
+      /*
+      ┌────────────────────────────────────────────────────────┐
+      │  📸 FOTO DE LA UNIVERSIDAD                             │
+      │  Cambia background-image con tu foto de la UNSCH       │
+      │  Ej: url('img/unsch.jpg')                              │
+      └────────────────────────────────────────────────────────┘
+      */
+    }
+    .univ-data-grid {
+      display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:2rem;
+    }
+    .univ-dato {
+      padding:1.2rem;
+      background:var(--gris-oscuro);
+      border-top:2px solid var(--oro);
+    }
+    .univ-dato strong {
+      display:block; font-family:'Bebas Neue',sans-serif;
+      font-size:2rem; color:var(--oro);
+    }
+    .univ-dato span { font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--gris-claro); }
+
+    /* ============================================================
+       COMUNICADOS / DOCUMENTOS
+       ============================================================ */
+    #comunicados { background: var(--carbon); }
+    .comunicados-list { display:flex; flex-direction:column; gap:1rem; }
+
+    /* ─────────────────────────────────────────────────────────
+       📄 CÓMO AGREGAR UN COMUNICADO O DOCUMENTO
+       ─────────────────────────────────────────────────────────
+       Copia el bloque <a class="comunicado-item"> completo.
+       Cambia:
+         · href → enlace al PDF o documento
+         · <span class="com-tipo"> → tipo (COMUNICADO / ACTA / etc.)
+         · <span class="com-fecha"> → fecha
+         · <strong> → título del documento
+         · <small> → descripción breve
+    ──────────────────────────────────────────────────────────── */
+
+    .comunicado-item {
+      display:flex; align-items:center; gap:1.5rem;
+      padding:1.2rem 1.5rem;
+      background:var(--gris-oscuro);
+      border-left:3px solid transparent;
+      transition: border-color .2s, background .2s;
+    }
+    .comunicado-item:hover { border-color:var(--oro); background:var(--gris-medio); }
+    .com-icon { font-size:2rem; flex-shrink:0; color:var(--oro); }
+    .com-body { flex:1; }
+    .com-meta { display:flex; gap:.75rem; align-items:center; margin-bottom:.3rem; }
+    .com-tipo {
+      font-size:.58rem; letter-spacing:.2em; text-transform:uppercase;
+      background:var(--oro); color:var(--negro);
+      padding:.15rem .5rem; font-weight:700;
+    }
+    .com-fecha { font-size:.68rem; color:var(--gris-claro); }
+    .com-body strong { font-size:.92rem; color:var(--blanco); }
+    .com-body small { font-size:.75rem; color:var(--gris-claro); display:block; margin-top:.2rem; }
+    .com-arrow { font-size:1.2rem; color:var(--gris-claro); transition: color .2s; }
+    .comunicado-item:hover .com-arrow { color:var(--oro); }
+
+    /* ============================================================
+       CONTACTO
+       ============================================================ */
+    #contacto {
+      background: var(--gris-oscuro);
+    }
+    .contacto-inner {
+      display:grid; grid-template-columns:1fr 1fr; gap:5rem;
+    }
+    .contacto-info { }
+    .contacto-datos { margin-top:2rem; display:flex; flex-direction:column; gap:1.2rem; }
+    .dato-fila {
+      display:flex; gap:1rem; align-items:flex-start;
+    }
+    .dato-fila-icon {
+      width:42px; height:42px; flex-shrink:0;
+      background:rgba(201,146,43,.1);
+      border:1px solid rgba(201,146,43,.25);
+      border-radius:50%;
+      display:flex; align-items:center; justify-content:center;
+      font-size:1.1rem; color:var(--oro);
+    }
+    .dato-fila-text strong { display:block; font-size:.8rem; color:var(--blanco); margin-bottom:.15rem; }
+    .dato-fila-text span { font-size:.78rem; color:var(--gris-claro); line-height:1.5; }
+
+    .redes { display:flex; gap:1rem; margin-top:2rem; flex-wrap:wrap; }
+    .red-btn {
+      display:flex; align-items:center; gap:.5rem;
+      padding:.6rem 1.2rem;
+      border:1px solid var(--gris-medio);
+      border-radius:2px;
+      font-size:.75rem; font-weight:600;
+      letter-spacing:.1em; text-transform:uppercase;
+      color:var(--gris-claro);
+      transition: border-color .2s, color .2s;
+    }
+    .red-btn:hover { border-color:var(--oro); color:var(--oro); }
+
+    /* Formulario */
+    .contacto-form { }
+    .form-group { margin-bottom:1.2rem; }
+    .form-group label {
+      display:block; font-size:.7rem; letter-spacing:.15em;
+      text-transform:uppercase; color:var(--gris-claro); margin-bottom:.4rem;
+    }
+    .form-group input,
+    .form-group textarea {
+      width:100%;
+      padding:.85rem 1rem;
+      background:var(--carbon);
+      border:1px solid var(--gris-medio);
+      border-radius:2px;
+      color:var(--blanco);
+      font-family:'Barlow',sans-serif;
+      font-size:.9rem;
+      outline:none;
+      transition:border-color .2s;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus { border-color:var(--oro); }
+    .form-group textarea { resize:vertical; min-height:120px; }
+    .form-submit {
+      width:100%;
+      padding:.9rem;
+      background:var(--oro);
+      color:var(--negro);
+      font-weight:700;
+      font-size:.85rem;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      border:none; border-radius:2px; cursor:pointer;
+      transition: background .2s;
+    }
+    .form-submit:hover { background:var(--oro-claro); }
+
+    /* ============================================================
+       FOOTER
+       ============================================================ */
+    footer {
+      background: var(--negro);
+      padding:4rem 6% 2rem;
+      border-top:1px solid var(--gris-oscuro);
+    }
+    .footer-top {
+      display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:3rem;
+      margin-bottom:3rem;
+    }
+    .footer-brand { }
+    .footer-brand-name {
+      font-family:'Bebas Neue',sans-serif;
+      font-size:1.4rem; letter-spacing:.1em;
+      color:var(--oro); margin-bottom:.5rem;
+    }
+    .footer-brand p { font-size:.78rem; color:var(--gris-claro); line-height:1.65; margin-bottom:1rem; }
+    .footer-col h4 {
+      font-size:.68rem; letter-spacing:.25em;
+      text-transform:uppercase; color:var(--oro);
+      margin-bottom:1.2rem;
+    }
+    .footer-col ul { display:flex; flex-direction:column; gap:.65rem; }
+    .footer-col ul li a {
+      font-size:.78rem; color:var(--gris-claro);
+      transition:color .2s;
+    }
+    .footer-col ul li a:hover { color:var(--blanco); }
+
+    .footer-bottom {
+      padding-top:2rem;
+      border-top:1px solid var(--gris-oscuro);
+      display:flex; align-items:center; justify-content:space-between;
+      flex-wrap:wrap; gap:1rem;
+    }
+    .footer-bottom p { font-size:.72rem; color:var(--gris-claro); }
+    .footer-bottom span { color:var(--oro); }
+
+    /* ============================================================
+       SCROLL TO TOP
+       ============================================================ */
+    #scroll-top {
+      position:fixed; bottom:2rem; right:2rem;
+      width:46px; height:46px;
+      background:var(--oro);
+      color:var(--negro);
+      border:none; border-radius:50%;
+      font-size:1.2rem; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      z-index:800;
+      opacity:0; pointer-events:none;
+      transition:opacity .3s, transform .3s;
+      box-shadow:0 4px 16px rgba(0,0,0,.4);
+    }
+    #scroll-top.visible { opacity:1; pointer-events:all; }
+    #scroll-top:hover { transform:translateY(-3px); }
+
+    /* ============================================================
+       RESPONSIVE
+       ============================================================ */
+    @media (max-width:1024px) {
+      #sobre, .carrera-inner, .univ-inner, .contacto-inner {
+        grid-template-columns:1fr;
+        gap:3rem;
+      }
+      .sobre-img-badge { bottom:-12px; right:-12px; }
+      .footer-top { grid-template-columns:1fr 1fr; }
+    }
+    @media (max-width:768px) {
+      nav { padding:.75rem 5%; }
+      .nav-menu { display:none; }
+      .hamburger { display:flex; }
+
+      section { padding:4rem 5%; }
+      .evento-item { grid-template-columns:60px 1fr; }
+      .evento-img { display:none; }
+
+      .footer-top { grid-template-columns:1fr; gap:2rem; }
+      .footer-bottom { flex-direction:column; text-align:center; }
+      .hero-title { font-size: clamp(2.5rem,12vw,5rem); }
+      /* 👇 AGREGA ESTO AL FINAL, ANTES DEL CIERRE } */
+      .hero-bg {
+        background:
+            linear-gradient(165deg, rgba(10,10,10,.85) 0%, rgba(28,33,40,.7) 100%),
+            url('assets/portada-movil.jpg') center center/cover no-repeat;
+        }
+    }
+    
+    @media (max-width:768px) {
+      .galeria-fotos { --alto: 170px; }
+      .lightbox { padding:3.5rem 1rem 5.5rem; }
+      .lightbox-img { max-height:calc(100vh - 13rem); }
+      .lightbox-caption span { font-size:.75rem; }
+      .lightbox-btn { width:42px; height:42px; }
+      .lightbox-prev, .lightbox-next { top:auto; bottom:1rem; transform:none; }
+      .lightbox-prev { left:calc(50% - 52px); }
+      .lightbox-next { right:calc(50% - 52px); }
+      .lightbox-close { top:.75rem; right:.75rem; }
+    }
+
+    @media (max-width:520px) {
+      .galeria-fotos { --alto: 120px; gap:.4rem; }
+      .galeria-evento { margin-bottom:2.25rem; }
+      .galeria-evento-titulo { font-size:.85rem; }
+      .sobre-features { grid-template-columns:1fr; }
+      .univ-data-grid { grid-template-columns:1fr; }
+    }
+
+    /* ============================================================
+       SMOOTH ACCENT LINE
+       ============================================================ */
+    .line-accent {
+      display:inline-block;
+      width:40px; height:2px;
+      background:var(--oro);
+      vertical-align:middle; margin-right:.6rem;
+    }
+
+    /* ============================================================
+   ASESORÍAS / TUTORÍAS
+   ============================================================ */
+    #asesorias { background: var(--gris-oscuro); }
+
+    .asesorias-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      margin-bottom: 4rem;
+    }
+
+    .asesorias-badge-wrap {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+
+    .asesoria-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .45rem;
+      padding: .4rem 1rem;
+      background: rgba(201,146,43,.08);
+      border: 1px solid rgba(201,146,43,.3);
+      border-radius: 2px;
+      font-size: .68rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--oro);
+      font-weight: 600;
+    }
+
+    .asesorias-modos {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.2rem;
+    }
+
+    .modo-card {
+      background: var(--carbon);
+      border: 1px solid var(--gris-medio);
+      border-radius: 3px;
+      padding: 1.8rem 1.5rem;
+      text-align: center;
+      transition: border-color .3s, transform .3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .modo-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--oro), var(--acento));
+      transform: scaleX(0);
+      transition: transform .3s;
+    }
+    .modo-card:hover { border-color: var(--oro); transform: translateY(-4px); }
+    .modo-card:hover::before { transform: scaleX(1); }
+    .modo-icon { font-size: 2.2rem; margin-bottom: .75rem; }
+    .modo-card h4 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: .08em;
+      color: var(--blanco);
+      margin-bottom: .4rem;
+    }
+    .modo-card p { font-size: .78rem; color: var(--gris-claro); line-height: 1.6; }
+
+    /* Grid de cursos */
+    .cursos-section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.4rem, 3vw, 2rem);
+      color: var(--blanco);
+      letter-spacing: .06em;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+    }
+    .cursos-section-title::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--gris-medio);
+    }
+
+    .cursos-tabs {
+      display: flex;
+      gap: .5rem;
+      flex-wrap: wrap;
+      margin-bottom: 2rem;
+    }
+    .curso-tab {
+      padding: .4rem 1.1rem;
+      background: transparent;
+      border: 1px solid var(--gris-medio);
+      border-radius: 2px;
+      color: var(--gris-claro);
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .curso-tab.active,
+    .curso-tab:hover {
+      background: var(--oro);
+      border-color: var(--oro);
+      color: var(--negro);
+    }
+
+    .cursos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 3rem;
+    }
+
+    .curso-card {
+      background: var(--carbon);
+      border: 1px solid var(--gris-medio);
+      border-radius: 3px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: .6rem;
+      transition: border-color .25s, box-shadow .25s, transform .25s;
+      position: relative;
+    }
+    .curso-card:hover {
+      border-color: rgba(201,146,43,.5);
+      box-shadow: 0 8px 32px rgba(0,0,0,.3);
+      transform: translateY(-3px);
+    }
+    .curso-card[data-cat] { display: none; }
+    .curso-card[data-cat].visible { display: flex; }
+
+    .curso-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .curso-emoji { font-size: 1.8rem; }
+    .curso-precio {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.15rem;
+      color: var(--oro);
+      letter-spacing: .04em;
+    }
+    .curso-card h4 {
+      font-size: .9rem;
+      font-weight: 700;
+      color: var(--blanco);
+      line-height: 1.35;
+    }
+    .curso-card p {
+      font-size: .75rem;
+      color: var(--gris-claro);
+      line-height: 1.55;
+      flex: 1;
+    }
+    .curso-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: .4rem;
+      padding-top: .8rem;
+      border-top: 1px solid var(--gris-oscuro);
+    }
+    .curso-nivel {
+      font-size: .6rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      padding: .2rem .6rem;
+      border-radius: 1px;
+      font-weight: 700;
+    }
+    .nivel-basico  { background: rgba(76,175,80,.15);  color: #4caf50; }
+    .nivel-medio   { background: rgba(201,146,43,.15); color: var(--oro); }
+    .nivel-avanzado{ background: rgba(224,90,28,.15);  color: var(--acento); }
+
+    .curso-btn {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--oro);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: color .2s;
+    }
+    .curso-btn:hover { color: var(--oro-claro); }
+
+    /* CTA Banner */
+    .asesorias-cta {
+      background: linear-gradient(135deg, var(--gris-medio) 0%, var(--carbon) 100%);
+      border: 1px solid rgba(201,146,43,.2);
+      border-radius: 4px;
+      padding: 3rem 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: center;
+      margin-top: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .asesorias-cta::before {
+      content: '⛏';
+      position: absolute;
+      right: 8rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 8rem;
+      opacity: .04;
+      pointer-events: none;
+    }
+    .asesorias-cta h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.4rem, 3vw, 2.2rem);
+      color: var(--blanco);
+      letter-spacing: .06em;
+      margin-bottom: .4rem;
+    }
+    .asesorias-cta p {
+      font-size: .82rem;
+      color: var(--gris-claro);
+      line-height: 1.6;
+      max-width: 560px;
+    }
+    .asesorias-cta-btns {
+      display: flex;
+      flex-direction: column;
+      gap: .75rem;
+      flex-shrink: 0;
+    }
+
+    /* Modal de inscripción */
+    .asesoria-modal-overlay {
+      position: fixed; inset: 0; z-index: 2000;
+      background: rgba(0,0,0,.8);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+    .asesoria-modal-overlay.open { display: flex; }
+    .asesoria-modal {
+      background: var(--gris-oscuro);
+      border: 1px solid rgba(201,146,43,.3);
+      border-radius: 6px;
+      padding: 2.5rem;
+      width: 100%;
+      max-width: 480px;
+      position: relative;
+      animation: fadeUp .35s ease;
+    }
+    .modal-close {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: var(--gris-medio);
+      border: none;
+      color: var(--gris-claro);
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .modal-close:hover { background: var(--roca); color: var(--blanco); }
+    .modal-titulo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: .06em;
+      color: var(--blanco);
+      margin-bottom: .25rem;
+    }
+    .modal-curso-nombre {
+      font-size: .78rem;
+      color: var(--oro);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    .modal-field { margin-bottom: 1rem; }
+    .modal-field label {
+      display: block;
+      font-size: .65rem;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: var(--gris-claro);
+      margin-bottom: .4rem;
+      font-weight: 600;
+    }
+    .modal-field input,
+    .modal-field select {
+      width: 100%;
+      padding: .7rem 1rem;
+      background: var(--carbon);
+      border: 1px solid var(--gris-medio);
+      border-radius: 3px;
+      color: var(--blanco);
+      font-family: 'Barlow', sans-serif;
+      font-size: .88rem;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .modal-field input:focus,
+    .modal-field select:focus { border-color: var(--oro); }
+    .modal-field select option { background: var(--gris-oscuro); }
+    .modal-btn-wa {
+      width: 100%;
+      padding: .9rem;
+      margin-top: .5rem;
+      background: #25D366;
+      color: #fff;
+      font-weight: 700;
+      font-size: .85rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+      transition: background .2s;
+    }
+    .modal-btn-wa:hover { background: #1ebe5d; }
+
+    @media (max-width: 860px) {
+      .asesorias-intro   { grid-template-columns: 1fr; gap: 2.5rem; }
+      .asesorias-modos   { grid-template-columns: 1fr 1fr; }
+      .asesorias-cta     { grid-template-columns: 1fr; }
+      .asesorias-cta-btns{ flex-direction: row; flex-wrap: wrap; }
+    }
+    @media (max-width: 520px) {
+      .asesorias-modos { grid-template-columns: 1fr; }
+    }
+
+    /* === MODAL TAGS CARRERA === */
+    .carrera-tags .tag {
+      cursor: pointer;
+      transition: background .2s, color .2s, border-color .2s;
+    }
+    .carrera-tags .tag:hover {
+      background: rgba(201,146,43,.25);
+      border-color: var(--oro);
+      color: var(--oro-claro);
+    }
+    .tag-modal-overlay {
+      position: fixed; inset: 0; z-index: 3000;
+      background: rgba(0,0,0,.75);
+      backdrop-filter: blur(6px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+    .tag-modal-overlay.open { display: flex; }
+    .tag-modal {
+      background: var(--gris-oscuro);
+      border: 1px solid rgba(201,146,43,.3);
+      border-radius: 6px;
+      padding: 2rem 2.2rem;
+      width: 100%;
+      max-width: 420px;
+      position: relative;
+      animation: fadeUp .3s ease;
+    }
+    .tag-modal::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--oro), var(--acento));
+      border-radius: 6px 6px 0 0;
+    }
+    .tag-modal-close {
+      position: absolute; top: .9rem; right: .9rem;
+      background: var(--gris-medio); border: none;
+      color: var(--gris-claro); width: 30px; height: 30px;
+      border-radius: 50%; font-size: .9rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .tag-modal-close:hover { background: var(--roca); color: var(--blanco); }
+    .tag-modal-icon { font-size: 2rem; margin-bottom: .6rem; }
+    .tag-modal-titulo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem; letter-spacing: .06em;
+      color: var(--blanco); margin-bottom: .2rem;
+    }
+    .tag-modal-subtitulo {
+      font-size: .68rem; letter-spacing: .2em;
+      text-transform: uppercase; color: var(--oro);
+      font-weight: 700; margin-bottom: 1rem;
+    }
+    .tag-modal-desc {
+      font-size: .88rem; color: var(--gris-claro);
+      line-height: 1.7;
+    }
+    .tag-modal-lista {
+      margin-top: .85rem; padding-left: 0;
+      list-style: none; display: flex;
+      flex-direction: column; gap: .4rem;
+    }
+    .tag-modal-lista li {
+      font-size: .8rem; color: var(--gris-claro);
+      display: flex; align-items: flex-start; gap: .5rem;
+    }
+    .tag-modal-lista li::before {
+      content: '⛏';
+      font-size: .7rem; flex-shrink: 0;
+      margin-top: .1rem;
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ============================================================
+     PRECARGA
+     ============================================================ -->
+<div id="preloader">
+  <div class="preloader-logo">
+    <!-- Ícono de pico/minería -->
+    <img src="assets/logo.png" alt="Logo CEFM" style="width:100px; height:100px; object-fit:contain; border-radius:50%;">
+  </div>
+  <div class="preloader-title">CEFM</div>
+  <div class="preloader-sub">Universidad Nacional de San Cristóbal de Huamanga</div>
+  <div class="loader-bar-wrap">
+    <div class="loader-bar"></div>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     NAVEGACIÓN
+     ============================================================ -->
+<nav id="navbar">
+  <a href="#hero" class="nav-brand" style="text-decoration:none;">
+    <div class="nav-logo-circle">
+      <img src="assets/logo.png" alt="Logo CEFM" style="width:100%; height:100%; object-fit:cover; border-radius:50%;">
+    </div>
+    <div class="nav-brand-text">
+      <strong>CEFM</strong>
+      <span>Ciencias Físico Matemáticas</span>
+    </div>
+  </div>
+
+  <ul class="nav-menu">
+    <li><a href="#sobre">Nosotros</a></li>
+    <li><a href="#noticias">Noticias</a></li>
+    <li><a href="#eventos">Eventos</a></li>
+    <li><a href="#logros">Logros</a></li>
+    <li><a href="#asesorias">Asesorías</a></li>
+    <li><a href="#biblioteca">Biblioteca</a></li>
+    <li><a href="#galeria">Galería</a></li>
+    <li><a href="#directiva">Directiva</a></li>
+    <li><a href="#carrera">La Carrera</a></li>
+    <li><a href="#comunicados">Docs</a></li>
+    <li><a href="#contacto" class="nav-cta">Contacto</a></li>
+  </ul>
+
+  <button class="hamburger" id="hamburger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Menú móvil -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#sobre" onclick="closeMobile()">Nosotros</a>
+  <a href="#noticias" onclick="closeMobile()">Noticias</a>
+  <a href="#eventos" onclick="closeMobile()">Eventos</a>
+  <a href="#logros" onclick="closeMobile()">Logros</a>
+  <a href="#asesorias" onclick="closeMobile()">Asesorías</a>
+  <a href="#biblioteca" onclick="closeMobile()">Biblioteca</a>
+  <a href="#galeria" onclick="closeMobile()">Galería</a>
+  <a href="#directiva" onclick="closeMobile()">Directiva</a>
+  <a href="#carrera" onclick="closeMobile()">La Carrera</a>
+  <a href="#comunicados" onclick="closeMobile()">Documentos</a>
+  <a href="#contacto" onclick="closeMobile()">Contacto</a>
+</div>
+
+
+<!-- ============================================================
+     HERO / PORTADA
+     ============================================================ -->
+<section id="hero">
+  <div class="hero-bg"></div>
+
+  <p class="hero-eyebrow">🏔 Ayacucho, Perú · UNSCH</p>
+
+  <h1 class="hero-title">
+    CIENCIAS<br>
+    FÍSICO <span class="highlight">MATEMÁTICAS</span>
+  </h1>
+
+  <p class="hero-subtitle">Centro de Estudiantes · Escuela de Ciencias Físico Matemáticas</p>
+
+  <div class="hero-badges">
+    <div class="hero-badge">
+      <i>∑</i>
+      <span>Formando Mentes Críticas</span>
+    </div>
+    <div class="hero-badge">
+      <i>🏆</i>
+      <span>Excelencia Académica</span>
+    </div>
+    <div class="hero-badge">
+      <i>🌎</i>
+      <span>Ciencia con Impacto</span>
+    </div>
+  </div>
+
+  <div class="hero-btns">
+    <a href="#eventos" class="btn-primary">Ver Eventos</a>
+    <a href="#sobre" class="btn-ghost">Conocer más</a>
+  </div>
+
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     ESTADÍSTICAS
+     ============================================================ -->
+<section id="stats">
+  <div class="stats-grid">
+    <div class="stat-item reveal">
+      <!-- 📝 Cambia el número y texto a los datos reales de tu escuela -->
+      <div class="stat-number" data-count="100">100+</div>
+      <div class="stat-label">Estudiantes Activos</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-number" data-count="30">30+</div>
+      <div class="stat-label">Años de Trayectoria</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-number" data-count="20">+20</div>
+      <div class="stat-label">Egresados por Año</div>
+    </div>
+    <div class="stat-item reveal">
+      <div class="stat-number" data-count="∞">∞</div>
+      <div class="stat-label">Tradición Académica</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     SOBRE NOSOTROS
+     ============================================================ -->
+<section id="sobre">
+  <!-- Columna imagen -->
+  <div class="sobre-img-wrap reveal">
+    <!--
+    📸 FOTO "SOBRE NOSOTROS"
+    Cambia el src por la ruta de tu imagen.
+    Ej: <img src="img/sobre.jpg" ...>
+    Tamaño ideal: 800×550 px
+    -->
+    <img
+      src="assets/quienes-somos.jpg"
+      alt="Estudiantes de Ciencias Físico Matemáticas"
+      class="sobre-img-main"
+      style="border-radius: 20px; width: 800px; height: 450px; object-fit: cover;"
+    >
+    <div class="sobre-img-badge">
+      <strong>#Unidos</strong>
+      <span>Somos más</span>
+    </div>
+  </div>
+
+  <!-- Columna texto -->
+  <div class="reveal">
+    <p class="section-label">Quiénes Somos</p>
+    <h2 class="section-title">El Centro de<br>Estudiantes</h2>
+    <div class="divider"></div>
+    <!--
+    📝 TEXTO "SOBRE NOSOTROS"
+    Reemplaza estos párrafos con la historia real del CEFM.
+    -->
+    <p class="section-desc">
+      El Centro de Estudiantes de Ciencias Físico Matemáticas (CEFM) es el órgano representativo
+      de todos los estudiantes de la Escuela Profesional de Ciencias Físico Matemáticas de la
+      Universidad Nacional de San Cristóbal de Huamanga. Trabajamos para defender los
+      derechos estudiantiles, promover la excelencia académica y fortalecer la cultura
+      científica y matemática en nuestra comunidad.
+    </p>
+
+    <div class="sobre-features">
+      <!--
+      📝 CARACTERÍSTICAS / PILARES
+      Edita el título, descripción e ícono de cada bloque.
+      Puedes agregar más copiando el bloque .sobre-feat
+      -->
+      <div class="sobre-feat">
+        <div class="sobre-feat-icon">🤝</div>
+        <div class="sobre-feat-text">
+          <strong>Representación Estudiantil</strong>
+          <span>Voceros ante autoridades y gremios universitarios.</span>
+        </div>
+      </div>
+      <div class="sobre-feat">
+        <div class="sobre-feat-icon">📚</div>
+        <div class="sobre-feat-text">
+          <strong>Apoyo Académico</strong>
+          <span>Tutorías, talleres, conferencias, etc.</span>
+        </div>
+      </div>
+      <div class="sobre-feat">
+        <div class="sobre-feat-icon">🔭</div>
+        <div class="sobre-feat-text">
+          <strong>Cultura Científica</strong>
+          <span>Olimpiadas, seminarios, congresos y semilleros de investigación.</span>
+        </div>
+      </div>
+      <div class="sobre-feat">
+        <div class="sobre-feat-icon">🏅</div>
+        <div class="sobre-feat-text">
+          <strong>Actividades Culturales</strong>
+          <span>Eventos, deportes y vida universitaria.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     NOTICIAS
+     ============================================================ -->
+<section id="noticias">
+  <div class="reveal">
+    <p class="section-label">Última Hora</p>
+    <h2 class="section-title">Noticias</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="noticias-grid">
+    <article class="noticia-card reveal">
+      <div class="noticia-img" style="background-image:url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20800%20500%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%231C2128%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%233A4A56%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27url%28%23g%29%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20text-anchor%3D%27middle%27%20font-size%3D%27275%27%20fill%3D%27%23C9922B%27%20fill-opacity%3D%27.5%27%20font-family%3D%27Georgia%2Cserif%27%3E%E2%88%91%3C/text%3E%3C/svg%3E')"></div>
+      <div class="noticia-body">
+        <div class="noticia-meta"><span class="noticia-cat">Académico</span><span class="noticia-fecha">Fecha por confirmar</span><span style="position:absolute; top:1rem; left:1rem; z-index:1;
+             background:#E05A1C; color:#fff; font-size:.6rem;
+             font-weight:700; letter-spacing:.2em; padding:.25rem .6rem;
+             border-radius:2px; text-transform:uppercase;">PRÓXIMO</span></div>
+        <h3>SEMANA DE LA MATEMÁTICA Y LA FÍSICA</h3>
+        <p>Ejemplo de noticia: charlas, talleres y concursos para estudiantes de la Escuela Profesional de Ciencias Físico Matemáticas de la UNSCH.</p>
+        <p id="extra-noticia1" style="display:none; margin-top:.6rem;">Reemplaza este texto con la información real: programa, ponentes, lugar y cómo inscribirse.</p>
+        <a href="javascript:void(0)" class="noticia-link" id="btn-noticia1" onclick="
+            const e=document.getElementById('extra-noticia1'),b=document.getElementById('btn-noticia1');
+            if(e.style.display==='none'){e.style.display='block';b.textContent='Leer menos ↑';}else{e.style.display='none';b.textContent='Leer más →';}">Leer más →</a>
+      </div>
+    </article>
+    <article class="noticia-card reveal">
+      <div class="noticia-img" style="background-image:url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20800%20500%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%231C2128%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%233A4A56%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27url%28%23g%29%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20text-anchor%3D%27middle%27%20font-size%3D%27275%27%20fill%3D%27%23C9922B%27%20fill-opacity%3D%27.5%27%20font-family%3D%27Georgia%2Cserif%27%3E%E2%88%AB%3C/text%3E%3C/svg%3E')"></div>
+      <div class="noticia-body">
+        <div class="noticia-meta"><span class="noticia-cat">Evento</span><span class="noticia-fecha">Fecha por confirmar</span><span style="position:absolute; top:1rem; left:1rem; z-index:1;
+             background:#E05A1C; color:#fff; font-size:.6rem;
+             font-weight:700; letter-spacing:.2em; padding:.25rem .6rem;
+             border-radius:2px; text-transform:uppercase;">PRÓXIMO</span></div>
+        <h3>SEMINARIO DE INVESTIGACIÓN ESTUDIANTIL</h3>
+        <p>Ejemplo de noticia: espacio para presentar trabajos, ponencias y proyectos de investigación de nuestra escuela.</p>
+        <p id="extra-noticia2" style="display:none; margin-top:.6rem;">Agrega aquí más detalles del evento, requisitos y contacto.</p>
+        <a href="javascript:void(0)" class="noticia-link" id="btn-noticia2" onclick="
+            const e=document.getElementById('extra-noticia2'),b=document.getElementById('btn-noticia2');
+            if(e.style.display==='none'){e.style.display='block';b.textContent='Leer menos ↑';}else{e.style.display='none';b.textContent='Leer más →';}">Leer más →</a>
+      </div>
+    </article>
+    <article class="noticia-card reveal">
+      <div class="noticia-img" style="background-image:url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20800%20500%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%231C2128%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%233A4A56%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27url%28%23g%29%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20text-anchor%3D%27middle%27%20font-size%3D%27275%27%20fill%3D%27%23C9922B%27%20fill-opacity%3D%27.5%27%20font-family%3D%27Georgia%2Cserif%27%3E%CF%80%3C/text%3E%3C/svg%3E')"></div>
+      <div class="noticia-body">
+        <div class="noticia-meta"><span class="noticia-cat">Concurso Académico</span><span class="noticia-fecha">Fecha por confirmar</span></div>
+        <h3>OLIMPIADA DE MATEMÁTICA UNSCH</h3>
+        <p>Ejemplo de noticia: concurso de resolución de problemas abierto a los estudiantes de la escuela.</p>
+        <p id="extra-noticia3" style="display:none; margin-top:.6rem;">Describe las bases, los premios y las fechas importantes.</p>
+        <a href="javascript:void(0)" class="noticia-link" id="btn-noticia3" onclick="
+            const e=document.getElementById('extra-noticia3'),b=document.getElementById('btn-noticia3');
+            if(e.style.display==='none'){e.style.display='block';b.textContent='Leer menos ↑';}else{e.style.display='none';b.textContent='Leer más →';}">Leer más →</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     EVENTOS
+     ============================================================ -->
+<section id="eventos">
+  <div class="reveal">
+    <p class="section-label">Próximas Actividades</p>
+    <h2 class="section-title">Eventos</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="eventos-list">
+    <div class="evento-item reveal">
+      <div class="evento-fecha-box"><span class="evento-dia">15</span><span class="evento-mes">Dic</span></div>
+      <div class="evento-info"><h3>Semana de la Matemática y la Física</h3><p>Ejemplo: charlas, talleres y concursos abiertos a toda la comunidad.</p><div class="evento-meta"><span class="evento-lugar">📍 UNSCH, Ayacucho</span></div></div>
+      <div class="evento-img" style="background-image:url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20400%20300%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%231C2128%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%233A4A56%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27url%28%23g%29%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20text-anchor%3D%27middle%27%20font-size%3D%27165%27%20fill%3D%27%23C9922B%27%20fill-opacity%3D%27.5%27%20font-family%3D%27Georgia%2Cserif%27%3E%E2%88%91%3C/text%3E%3C/svg%3E'); border-radius: 8px;"></div>
+    </div>
+    <div class="evento-item reveal">
+      <div class="evento-fecha-box"><span class="evento-dia">20</span><span class="evento-mes">Ene</span></div>
+      <div class="evento-info"><h3>Seminario de Investigación Estudiantil</h3><p>Ejemplo: presentación de trabajos y proyectos de estudiantes.</p><div class="evento-meta"><span class="evento-lugar">📍 Auditorio UNSCH</span></div></div>
+      <div class="evento-img" style="background-image:url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20400%20300%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%231C2128%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%233A4A56%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27url%28%23g%29%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20text-anchor%3D%27middle%27%20font-size%3D%27165%27%20fill%3D%27%23C9922B%27%20fill-opacity%3D%27.5%27%20font-family%3D%27Georgia%2Cserif%27%3E%E2%88%AB%3C/text%3E%3C/svg%3E'); border-radius: 8px;"></div>
+    </div>
+    <div class="evento-item reveal">
+      <div class="evento-fecha-box"><span class="evento-dia">10</span><span class="evento-mes">Mar</span></div>
+      <div class="evento-info"><h3>Olimpiada de Matemática</h3><p>Ejemplo: concurso de problemas para estudiantes de la escuela.</p><div class="evento-meta"><span class="evento-lugar">📍 UNSCH, Ayacucho</span></div></div>
+      <div class="evento-img" style="background-image:url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20400%20300%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%231C2128%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%233A4A56%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27url%28%23g%29%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20text-anchor%3D%27middle%27%20font-size%3D%27165%27%20fill%3D%27%23C9922B%27%20fill-opacity%3D%27.5%27%20font-family%3D%27Georgia%2Cserif%27%3E%CF%80%3C/text%3E%3C/svg%3E'); border-radius: 8px;"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     LOGROS
+     ============================================================ -->
+<section id="logros">
+  <div class="reveal">
+    <p class="section-label">Orgullo Físico Matemático</p>
+    <h2 class="section-title">Nuestros Logros</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="logros-filtro" id="logrosFiltro" role="group" aria-label="Filtrar logros por año"></div>
+  <div class="logros-grid">
+    <div class="logro-card reveal">
+      <div class="logro-icon">🥇</div>
+      <h3>1er Lugar en [nombre del concurso] 2026</h3>
+      <p>Ejemplo de logro: describe aquí la categoría y el concurso en que participaron nuestros estudiantes.</p>
+      <ul class="logro-ganadores"><li>Nombre y apellidos</li><li>Nombre y apellidos</li></ul>
+      <span class="logro-año">Octubre, 2026 - Ciudad</span>
+    </div>
+    <div class="logro-card reveal">
+      <div class="logro-icon">🥈</div>
+      <h3>2do Lugar en [nombre del concurso] 2026</h3>
+      <p>Ejemplo de logro: reemplaza con los datos reales del concurso.</p>
+      <ul class="logro-ganadores"><li>Nombre y apellidos</li></ul>
+      <span class="logro-año">Septiembre, 2026 - Ciudad</span>
+    </div>
+    <div class="logro-card reveal">
+      <div class="logro-icon">🥉</div>
+      <h3>3er Lugar en [nombre del concurso] 2025</h3>
+      <p>Ejemplo de logro: reemplaza con los datos reales del concurso.</p>
+      <ul class="logro-ganadores"><li>Nombre y apellidos</li><li>Nombre y apellidos</li><li>Nombre y apellidos</li></ul>
+      <span class="logro-año">Noviembre, 2025 - Ciudad</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     ASESORÍAS & TUTORÍAS
+     ============================================================ -->
+<section id="asesorias">
+  <div class="reveal">
+    <p class="section-label">Comunidad que aprende</p>
+    <h2 class="section-title">Asesorías &<br>Tutorías</h2>
+    <div class="divider"></div>
+  </div>
+
+  <!-- Bloque intro: descripción + modos de atención -->
+  <div class="asesorias-intro">
+    <div class="reveal">
+      <p class="section-desc">
+        Estudiantes destacados de Ciencias Físico Matemáticas ofrecen asesorías personalizadas
+        en cursos de matemática, física y computación. Ya seas de nuestra escuela o de cualquier otra carrera, aquí encuentras el refuerzo
+        que necesitas, virtual o presencial y a precio justo.
+      </p>
+      <div class="asesorias-badge-wrap">
+        <span class="asesoria-badge">✅ Estudiantes verificados</span>
+        <span class="asesoria-badge">🎯 Clases personalizadas</span>
+        <span class="asesoria-badge">📅 Horario flexible</span>
+      </div>
+    </div>
+
+    <div class="asesorias-modos reveal">
+      <div class="modo-card">
+        <div class="modo-icon">🖥️</div>
+        <h4>Virtual</h4>
+        <p>Sesiones por Zoom / Google Meet.</p>
+      </div>
+      <div class="modo-card">
+        <div class="modo-icon">🏫</div>
+        <h4>Presencial</h4>
+        <p>En las instalaciones de la UNSCH o en el lugar que coordines con el asesor.</p>
+      </div>
+      <div class="modo-card">
+        <div class="modo-icon">👤</div>
+        <h4>Individual</h4>
+        <p>Atención 100 % personalizada, avanza a tu ritmo y en los temas que más necesitas.</p>
+      </div>
+      <div class="modo-card">
+        <div class="modo-icon">👥</div>
+        <h4>Grupal</h4>
+        <p>Hasta 4 personas. Comparte el costo y aprende en equipo. Precio especial por grupo.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filtros por categoría -->
+  <h3 class="cursos-section-title">Cursos disponibles</h3>
+
+  <div class="cursos-tabs">
+    <button class="curso-tab active" onclick="filtrarCursos('todos', this)">Todos</button>
+    <button class="curso-tab" onclick="filtrarCursos('calculo', this)">Cálculo</button>
+    <button class="curso-tab" onclick="filtrarCursos('algebra', this)">Álgebra</button>
+    <button class="curso-tab" onclick="filtrarCursos('fisica', this)">Física</button>
+    <button class="curso-tab" onclick="filtrarCursos('estadistica', this)">Estadística</button>
+    <button class="curso-tab" onclick="filtrarCursos('programacion', this)">Programación</button>
+  </div>
+
+  <div class="cursos-grid" id="cursosGrid">
+
+    <div class="curso-card visible" data-cat="calculo" data-nombre="Cálculo I: Límites y Derivadas" >
+      <div class="curso-top"><span class="curso-emoji">📐</span></div>
+      <h4>Cálculo I: Límites y Derivadas</h4>
+      <p>Límites, continuidad, derivadas e introducción a la integral.</p>
+      <div class="curso-footer"><button class="curso-btn" onclick="abrirModalAsesoria('Cálculo I: Límites y Derivadas')">Solicitar →</button></div>
+    </div>
+
+    <div class="curso-card visible" data-cat="calculo" data-nombre="Cálculo II: Integrales y Series" >
+      <div class="curso-top"><span class="curso-emoji">∫</span></div>
+      <h4>Cálculo II: Integrales y Series</h4>
+      <p>Integral definida, técnicas de integración, series y aplicaciones.</p>
+      <div class="curso-footer"><button class="curso-btn" onclick="abrirModalAsesoria('Cálculo II: Integrales y Series')">Solicitar →</button></div>
+    </div>
+
+    <div class="curso-card visible" data-cat="algebra" data-nombre="Álgebra Lineal" >
+      <div class="curso-top"><span class="curso-emoji">🔢</span></div>
+      <h4>Álgebra Lineal</h4>
+      <p>Matrices, sistemas lineales, espacios vectoriales, autovalores y diagonalización.</p>
+      <div class="curso-footer"><button class="curso-btn" onclick="abrirModalAsesoria('Álgebra Lineal')">Solicitar →</button></div>
+    </div>
+
+    <div class="curso-card visible" data-cat="calculo" data-nombre="Análisis Real" >
+      <div class="curso-top"><span class="curso-emoji">🧮</span></div>
+      <h4>Análisis Real</h4>
+      <p>Sucesiones, series, continuidad, diferenciabilidad e integral de Riemann.</p>
+      <div class="curso-footer"><button class="curso-btn" onclick="abrirModalAsesoria('Análisis Real')">Solicitar →</button></div>
+    </div>
+
+    <div class="curso-card visible" data-cat="fisica" data-nombre="Física I: Mecánica" >
+      <div class="curso-top"><span class="curso-emoji">⚙️</span></div>
+      <h4>Física I: Mecánica</h4>
+      <p>Cinemática, dinámica, trabajo y energía, momentum y colisiones.</p>
+      <div class="curso-footer"><button class="curso-btn" onclick="abrirModalAsesoria('Física I: Mecánica')">Solicitar →</button></div>
+    </div>
+
+    <div class="curso-card visible" data-cat="fisica" data-nombre="Física II: Electromagnetismo" >
+      <div class="curso-top"><span class="curso-emoji">⚡</span></div>
+      <h4>Física II: Electromagnetismo</h4>
+      <p>Campos eléctricos y magnéticos, ley de Gauss, circuitos y ondas.</p>
+      <div class="curso-footer"><button class="curso-btn" onclick="abrirModalAsesoria('Física II: Electromagnetismo')">Solicitar →</button></div>
+    </div>
+
+    <div class="curso-card visible" data-cat="estadistica" data-nombre="Probabilidad y Estadística" >
+      <div class="curso-top"><span class="curso-emoji">📊</span></div>
+      <h4>Probabilidad y Estadística</h4>
+      <p>Variables aleatorias, distribuciones, inferencia y regresión.</p>
+      <div class="curso-footer"><button class="curso-btn" onclick="abrirModalAsesoria('Probabilidad y Estadística')">Solicitar →</button></div>
+    </div>
+
+    <div class="curso-card visible" data-cat="programacion" data-nombre="Python para Ciencias" >
+      <div class="curso-top"><span class="curso-emoji">🐍</span></div>
+      <h4>Python para Ciencias</h4>
+      <p>Programación básica, NumPy/Pandas y gráficas con Matplotlib.</p>
+      <div class="curso-footer"><button class="curso-btn" onclick="abrirModalAsesoria('Python para Ciencias')">Solicitar →</button></div>
+    </div>
+
+
+    <!-- ════════════════════════════════════════════════
+    📚 CÓMO AGREGAR UN CURSO
+    ════════════════════════════════════════════════
+    Copia cualquier .curso-card y cambia:
+      · data-cat   → categoría (calculo | fisica | quimica |
+                      topografia | estadistica | programacion | minas)
+      · emoji      → ícono del curso
+      · data-precio→ precio para el WhatsApp
+      · .curso-precio → texto visible del precio
+      · h4         → nombre del curso
+      · p          → descripción breve
+      · .curso-nivel → nivel + clase CSS:
+           nivel-basico / nivel-medio / nivel-avanzado
+    ════════════════════════════════════════════════ -->
+
+    <!-- ✅ AGREGA MÁS CURSOS COPIANDO CUALQUIER .curso-card -->
+
+  </div>
+
+  <!-- CTA Banner -->
+  <div class="asesorias-cta reveal">
+    <div>
+      <h3>¿No encuentras tu curso? ¡Escríbenos!</h3>
+      <p>Tenemos asesores en muchas otras áreas. Si no ves tu materia en la lista, contáctanos por WhatsApp y te conectamos con el asesor correcto.</p>
+    </div>
+    <div class="asesorias-cta-btns">
+      <a href="https://wa.me/51966956499?text=Hola%2C%20quiero%20información%20sobre%20asesorías%20del%20CEFM"
+        target="_blank" class="btn-primary">
+        <i class="fab fa-whatsapp" style="font-size:1.1rem; margin-right:.4rem;"></i> WhatsApp
+      </a>
+      <a href="#contacto" class="btn-ghost">Ver Contacto</a>
+    </div>
+  </div>
+</section>
+
+<!-- Modal de inscripción a asesoría -->
+<div class="asesoria-modal-overlay" id="asesoriaModal" onclick="cerrarModalAsesoria(event)">
+  <div class="asesoria-modal">
+    <button class="modal-close" onclick="document.getElementById('asesoriaModal').classList.remove('open')">✕</button>
+    <p class="modal-titulo">Solicitar Asesoría</p>
+    <p class="modal-curso-nombre" id="modalCursoNombre">Cálculo I</p>
+    <form id="asesoriaForm" onsubmit="enviarSolicitudAsesoria(event)">
+      <div class="modal-field">
+        <label>Tu nombre completo *</label>
+        <input type="text" id="asfNombre" placeholder="Nombre y apellidos" required>
+      </div>
+      <div class="modal-field">
+        <label>Tu WhatsApp *</label>
+        <input type="tel" id="asfTelefono" placeholder="+51 9XX XXX XXX" required>
+      </div>
+      <div class="modal-field">
+        <label>Carrera / Facultad</label>
+        <input type="text" id="asfCarrera" placeholder="Ej: Ciencias Físico Matemáticas">
+      </div>
+      <div class="modal-field">
+        <label>Modalidad preferida</label>
+        <select id="asfModalidad">
+          <option value="Virtual">Virtual (Zoom / Meet)</option>
+          <option value="Presencial">Presencial en la UNSCH</option>
+          <option value="Indistinto">Me es indistinto</option>
+        </select>
+      </div>
+      <div class="modal-field">
+        <label>Tipo de clase</label>
+        <select id="asfTipo">
+          <option value="Individual">Individual</option>
+          <option value="Grupal (hasta 4)">Grupal (hasta 4 personas)</option>
+        </select>
+      </div>
+      <button type="submit" class="modal-btn-wa">
+        <i class="fab fa-whatsapp"></i> Enviar solicitud por WhatsApp
+      </button>
+    </form>
+  </div>
+</div>
+
+
+<!-- ============================================================
+     GALERÍA DE FOTOS
+     ============================================================ -->
+<section id="galeria">
+  <div class="reveal">
+    <p class="section-label">Momentos Inolvidables</p>
+    <h2 class="section-title">Galería</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="logros-filtro" id="galeriaFiltro" role="group" aria-label="Filtrar galería por año"></div>
+  <div class="galeria-eventos">
+    <div class="galeria-evento reveal">
+      <div class="galeria-evento-cabecera"><h3 class="galeria-evento-titulo">Actividad de ejemplo 2026</h3></div>
+      <div class="galeria-fotos"><img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20800%20500%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%231C2128%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%233A4A56%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27url%28%23g%29%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20text-anchor%3D%27middle%27%20font-size%3D%27275%27%20fill%3D%27%23C9922B%27%20fill-opacity%3D%27.5%27%20font-family%3D%27Georgia%2Cserif%27%3E%E2%88%91%3C/text%3E%3C/svg%3E" alt="Actividad de ejemplo 2026" loading="lazy"><img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20600%20600%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%231C2128%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%233A4A56%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27url%28%23g%29%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20text-anchor%3D%27middle%27%20font-size%3D%27330%27%20fill%3D%27%23C9922B%27%20fill-opacity%3D%27.5%27%20font-family%3D%27Georgia%2Cserif%27%3E%E2%88%AB%3C/text%3E%3C/svg%3E" alt="Actividad de ejemplo 2026" loading="lazy"><img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20800%20450%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%231C2128%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%233A4A56%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27url%28%23g%29%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20text-anchor%3D%27middle%27%20font-size%3D%27247%27%20fill%3D%27%23C9922B%27%20fill-opacity%3D%27.5%27%20font-family%3D%27Georgia%2Cserif%27%3E%CF%80%3C/text%3E%3C/svg%3E" alt="Actividad de ejemplo 2026" loading="lazy"><img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20700%20500%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%231C2128%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%233A4A56%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27url%28%23g%29%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20text-anchor%3D%27middle%27%20font-size%3D%27275%27%20fill%3D%27%23C9922B%27%20fill-opacity%3D%27.5%27%20font-family%3D%27Georgia%2Cserif%27%3E%E2%88%82%3C/text%3E%3C/svg%3E" alt="Actividad de ejemplo 2026" loading="lazy"></div>
+    </div>
+    <div class="galeria-evento reveal">
+      <div class="galeria-evento-cabecera"><h3 class="galeria-evento-titulo">Bienvenida de ingresantes 2025</h3></div>
+      <div class="galeria-fotos"><img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20800%20500%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%231C2128%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%233A4A56%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27url%28%23g%29%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20text-anchor%3D%27middle%27%20font-size%3D%27275%27%20fill%3D%27%23C9922B%27%20fill-opacity%3D%27.5%27%20font-family%3D%27Georgia%2Cserif%27%3E%E2%88%91%3C/text%3E%3C/svg%3E" alt="Bienvenida de ingresantes 2025" loading="lazy"><img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20600%20600%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%231C2128%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%233A4A56%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27url%28%23g%29%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20text-anchor%3D%27middle%27%20font-size%3D%27330%27%20fill%3D%27%23C9922B%27%20fill-opacity%3D%27.5%27%20font-family%3D%27Georgia%2Cserif%27%3E%E2%88%AB%3C/text%3E%3C/svg%3E" alt="Bienvenida de ingresantes 2025" loading="lazy"><img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20800%20450%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%231C2128%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%233A4A56%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27url%28%23g%29%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20text-anchor%3D%27middle%27%20font-size%3D%27247%27%20fill%3D%27%23C9922B%27%20fill-opacity%3D%27.5%27%20font-family%3D%27Georgia%2Cserif%27%3E%CF%80%3C/text%3E%3C/svg%3E" alt="Bienvenida de ingresantes 2025" loading="lazy"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     DIRECTIVA
+     ============================================================ -->
+<section id="directiva">
+  <div class="reveal">
+    <p class="section-label">Gestión 2026-2027</p>
+    <h2 class="section-title">Nuestra Directiva</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="directiva-grid">
+    <div class="miembro-card reveal">
+      <div class="miembro-foto" style="background-image:url('assets/directiva/cabrera.jpg'),url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20400%20500%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%231C2128%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%233A4A56%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27url%28%23g%29%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20text-anchor%3D%27middle%27%20font-size%3D%27275%27%20fill%3D%27%23C9922B%27%20fill-opacity%3D%27.5%27%20font-family%3D%27Georgia%2Cserif%27%3E%F0%9F%91%A4%3C/text%3E%3C/svg%3E')"></div>
+      <h3>Cabrera Otarola, Eduard Antonio</h3>
+      <span class="miembro-cargo">Presidente</span>
+      <span class="miembro-ciclo">Gestión 2026-2027</span>
+    </div>
+    <div class="miembro-card reveal">
+      <div class="miembro-foto" style="background-image:url('assets/directiva/huaytalla.jpg'),url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20400%20500%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%231C2128%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%233A4A56%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27url%28%23g%29%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20text-anchor%3D%27middle%27%20font-size%3D%27275%27%20fill%3D%27%23C9922B%27%20fill-opacity%3D%27.5%27%20font-family%3D%27Georgia%2Cserif%27%3E%F0%9F%91%A4%3C/text%3E%3C/svg%3E')"></div>
+      <h3>Huaytalla Farfan, Vasanio Baltasare</h3>
+      <span class="miembro-cargo">Vicepresidente</span>
+      <span class="miembro-ciclo">Gestión 2026-2027</span>
+    </div>
+    <div class="miembro-card reveal">
+      <div class="miembro-foto" style="background-image:url('assets/directiva/rodriguez.jpg'),url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20400%20500%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%231C2128%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%233A4A56%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27url%28%23g%29%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20text-anchor%3D%27middle%27%20font-size%3D%27275%27%20fill%3D%27%23C9922B%27%20fill-opacity%3D%27.5%27%20font-family%3D%27Georgia%2Cserif%27%3E%F0%9F%91%A4%3C/text%3E%3C/svg%3E')"></div>
+      <h3>Rodriguez Quispe, Anderson Jaser</h3>
+      <span class="miembro-cargo">Secretario General</span>
+      <span class="miembro-ciclo">Gestión 2026-2027</span>
+    </div>
+    <div class="miembro-card reveal">
+      <div class="miembro-foto" style="background-image:url('assets/directiva/castro.jpg'),url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20400%20500%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%231C2128%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%233A4A56%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27url%28%23g%29%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20text-anchor%3D%27middle%27%20font-size%3D%27275%27%20fill%3D%27%23C9922B%27%20fill-opacity%3D%27.5%27%20font-family%3D%27Georgia%2Cserif%27%3E%F0%9F%91%A4%3C/text%3E%3C/svg%3E')"></div>
+      <h3>Castro Huayta, Rosa Brillyt</h3>
+      <span class="miembro-cargo">Tesorera</span>
+      <span class="miembro-ciclo">Gestión 2026-2027</span>
+    </div>
+    <div class="miembro-card reveal">
+      <div class="miembro-foto" style="background-image:url('assets/directiva/flores.jpg'),url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20400%20500%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%231C2128%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%233A4A56%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27url%28%23g%29%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20text-anchor%3D%27middle%27%20font-size%3D%27275%27%20fill%3D%27%23C9922B%27%20fill-opacity%3D%27.5%27%20font-family%3D%27Georgia%2Cserif%27%3E%F0%9F%91%A4%3C/text%3E%3C/svg%3E')"></div>
+      <h3>Flores Aguilar, Herber Antony</h3>
+      <span class="miembro-cargo">Secretario de Asuntos Académicos</span>
+      <span class="miembro-ciclo">Gestión 2026-2027</span>
+    </div>
+    <div class="miembro-card reveal">
+      <div class="miembro-foto" style="background-image:url('assets/directiva/rojas.jpg'),url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20400%20500%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%231C2128%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%233A4A56%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27url%28%23g%29%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20text-anchor%3D%27middle%27%20font-size%3D%27275%27%20fill%3D%27%23C9922B%27%20fill-opacity%3D%27.5%27%20font-family%3D%27Georgia%2Cserif%27%3E%F0%9F%91%A4%3C/text%3E%3C/svg%3E')"></div>
+      <h3>Rojas Munarriz, Pericks Jesús</h3>
+      <span class="miembro-cargo">Secretario de Deportes</span>
+      <span class="miembro-ciclo">Gestión 2026-2027</span>
+    </div>
+    <div class="miembro-card reveal">
+      <div class="miembro-foto" style="background-image:url('assets/directiva/oriundo.jpg'),url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20400%20500%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%231C2128%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%233A4A56%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27url%28%23g%29%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20text-anchor%3D%27middle%27%20font-size%3D%27275%27%20fill%3D%27%23C9922B%27%20fill-opacity%3D%27.5%27%20font-family%3D%27Georgia%2Cserif%27%3E%F0%9F%91%A4%3C/text%3E%3C/svg%3E')"></div>
+      <h3>Oriundo Quispe, Kevin Jhoanell</h3>
+      <span class="miembro-cargo">Vocero General</span>
+      <span class="miembro-ciclo">Gestión 2026-2027</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     LA CARRERA
+     ============================================================ -->
+<section id="carrera">
+  <div class="carrera-inner">
+    <div class="reveal">
+      <p class="section-label">Información Académica</p>
+      <h2 class="section-title">Ingeniería<br>de Minas</h2>
+      <div class="divider"></div>
+      <!--
+      📝 TEXTO DE LA CARRERA
+      Edita los párrafos con la info real de la carrera en la UNSCH.
+      -->
+      <p class="section-desc">
+        Las Ciencias Físico Matemáticas forman profesionales capaces de modelar fenómenos, demostrar resultados y resolver problemas con rigor, desde la teoría matemática hasta sus aplicaciones en la física y la computación.
+      </p>
+      <p class="section-desc" style="margin-top:-1rem">
+        La escuela ofrece una sólida formación en análisis, álgebra, geometría, física, probabilidad y computación científica. (Edita este texto con la información oficial.)
+      </p>
+
+      <a href="#biblioteca" style="display:inline-flex;align-items:center;gap:.5rem;color:var(--oro);font-size:.88rem;font-weight:600;text-decoration:underline;text-underline-offset:4px;margin-bottom:1.5rem;"><i class="fas fa-file-pdf"></i> Ver material académico</a>
+
+      <!-- 👇 NUEVO: en línea propia gracias a display:block -->
+      
+
+      <div class="carrera-tags"><span class="tag" onclick="abrirTagModal('Análisis Matemático')">Análisis Matemático</span><span class="tag" onclick="abrirTagModal('Álgebra y Geometría')">Álgebra y Geometría</span><span class="tag" onclick="abrirTagModal('Física Clásica')">Física Clásica</span><span class="tag" onclick="abrirTagModal('Física Moderna')">Física Moderna</span><span class="tag" onclick="abrirTagModal('Probabilidad y Estadística')">Probabilidad y Estadística</span><span class="tag" onclick="abrirTagModal('Computación Científica')">Computación Científica</span></div>
+    </div>
+
+    <img src="data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%20900%20600%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%231C2128%27/%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%233A4A56%27/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20fill%3D%27url%28%23g%29%27/%3E%3Ctext%20x%3D%2750%25%27%20y%3D%2766%25%27%20text-anchor%3D%27middle%27%20font-size%3D%27330%27%20fill%3D%27%23C9922B%27%20fill-opacity%3D%27.5%27%20font-family%3D%27Georgia%2Cserif%27%3E%E2%88%91%3C/text%3E%3C/svg%3E" alt="Ciencias Físico Matemáticas" style="width:90%; height:380px; object-fit:cover; border-radius:10px;">
+      <!--
+      📸 FOTO "LA CARRERA"
+      Reemplaza la URL por tu foto de minería o estudiantes.
+      Ej: style="background-image:url('img/carrera.jpg')"
+      -->
+    </div>
+  </div>
+</section>
+
+<!-- MODAL TAGS CARRERA -->
+<div class="tag-modal-overlay" id="tagModal" onclick="cerrarTagModal(event)">
+  <div class="tag-modal">
+    <button class="tag-modal-close" onclick="document.getElementById('tagModal').classList.remove('open')">✕</button>
+    <div class="tag-modal-icon" id="tagModalIcon"></div>
+    <p class="tag-modal-titulo" id="tagModalTitulo"></p>
+    <p class="tag-modal-subtitulo" id="tagModalSub"></p>
+    <p class="tag-modal-desc" id="tagModalDesc"></p>
+    <ul class="tag-modal-lista" id="tagModalLista"></ul>
+  </div>
+</div>
+
+<!-- ============================================================
+     UNIVERSIDAD
+     ============================================================ -->
+<section id="universidad">
+  <div class="univ-inner">
+    <img src="assets/fachada-unsch.jpg" alt="Universidad Nacional San Cristóbal de Huamanga" 
+      style="width:100%; height:480px; object-fit:cover; border-radius:10px;">
+      <!--
+      📸 FOTO UNIVERSIDAD UNSCH
+      Reemplaza la URL por una foto de la UNSCH o de Ayacucho.
+      Ej: style="background-image:url('img/unsch.jpg')"
+      -->
+
+    <div class="reveal">
+      <p class="section-label">Nuestra Casa de Estudios</p>
+      <h2 class="section-title">Universidad Nacional de<br>San Cristóbal de Huamanga</h2>
+      <div class="divider"></div>
+      <!--
+      📝 TEXTO SOBRE LA UNSCH
+      Edita con la información real de la universidad.
+      -->
+      <p class="section-desc">
+        Fundada en 1677, la Universidad Nacional de San Cristóbal de Huamanga es una
+        de las universidades más antiguas del Perú. Ubicada en Ayacucho, forma
+        profesionales comprometidos con el desarrollo de la región y del país.
+      </p>
+      <p class="section-desc">
+        Aquí puedes contar la historia de la Escuela Profesional de Ciencias Físico Matemáticas: cuándo se creó, cómo evolucionó su plan de estudios y qué la distingue. (Edita este texto.)
+      </p>
+      <div class="univ-data-grid">
+        <!-- 📝 Cambia los datos reales de la universidad -->
+        <div class="univ-dato">
+          <strong>1677</strong>
+          <span>Año de Fundación</span>
+        </div>
+        <div class="univ-dato">
+          <strong>10 mil+</strong>
+          <span>Estudiantes Matriculados</span>
+        </div>
+        <div class="univ-dato">
+          <strong>UNSCH</strong>
+          <span>Ayacucho, Perú</span>
+        </div>
+        <div class="univ-dato">
+          <strong>Licenciada</strong>
+          <span>Condición SUNEDU</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     COMUNICADOS / DOCUMENTOS
+     ============================================================ -->
+<!-- ============================================================
+     BIBLIOTECA ACADÉMICA (PDFs)
+     📝 Para añadir un PDF: súbelo a la carpeta assets/pdfs/ y agrega una línea en la lista PDFS (más abajo).
+     ============================================================ -->
+<section id="biblioteca">
+<style>
+  .bib-tools{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;margin-bottom:1.4rem}
+  .bib-buscar{flex:1;min-width:220px;background:var(--gris-oscuro);border:1px solid rgba(201,146,43,.2);color:var(--blanco);padding:.7rem 1rem;border-radius:3px;font:inherit;font-size:.9rem}
+  .bib-buscar:focus{outline:none;border-color:var(--oro)}
+  .bib-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.2rem;margin-bottom:3rem}
+  .bib-card{background:var(--gris-oscuro);border-radius:2px;padding:1.5rem;position:relative;overflow:hidden;transition:transform .3s,box-shadow .3s;display:flex;flex-direction:column;gap:.5rem}
+  .bib-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--oro),var(--acento))}
+  .bib-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.4)}
+  .bib-cat{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--oro)}
+  .bib-card h3{font-size:1rem;color:var(--blanco);line-height:1.35}
+  .bib-card p{font-size:.8rem;color:var(--gris-claro)}
+  .bib-acc{display:flex;gap:.8rem;margin-top:auto;padding-top:.8rem}
+  .bib-acc a{font-size:.8rem;font-weight:700;color:var(--oro)}
+  .bib-acc a:hover{color:var(--oro-claro)}
+  .bib-vacio{grid-column:1/-1;padding:2rem;text-align:center;color:var(--gris-claro);border:1px dashed rgba(201,146,43,.3);border-radius:4px;font-size:.9rem}
+  .bib-subir{display:grid;grid-template-columns:1fr 1.2fr;gap:2rem;background:var(--gris-oscuro);border:1px solid rgba(201,146,43,.2);border-radius:4px;padding:2rem}
+  .bib-subir h3{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;letter-spacing:.06em;color:var(--oro);margin-bottom:.5rem}
+  .bib-subir p{color:var(--gris-claro);font-size:.88rem}
+  .bib-subir form{display:grid;gap:.7rem}
+  .bib-subir input,.bib-subir select{width:100%;background:var(--carbon);border:1px solid rgba(201,146,43,.2);color:var(--blanco);padding:.65rem .8rem;border-radius:3px;font:inherit;font-size:.88rem}
+  .bib-subir input:focus,.bib-subir select:focus{outline:none;border-color:var(--oro)}
+  .bib-subir .btn-primary{border:0;cursor:pointer;font:inherit;font-weight:700}
+  @media(max-width:800px){.bib-subir{grid-template-columns:1fr}}
+</style>
+  <div class="reveal">
+    <p class="section-label">Material de estudio</p>
+    <h2 class="section-title">Biblioteca<br>Académica</h2>
+    <div class="divider"></div>
+    <p class="section-desc">Separatas, libros, exámenes resueltos, apuntes y solucionarios en PDF compartidos por la comunidad de Ciencias Físico Matemáticas.</p>
+  </div>
+  <div class="bib-tools">
+    <input class="bib-buscar" id="bibBuscar" type="search" placeholder="Buscar por título, curso o autor…" aria-label="Buscar PDFs">
+  </div>
+  <div class="logros-filtro" id="bibFiltro" role="group" aria-label="Filtrar por categoría"></div>
+  <div class="bib-grid" id="bibGrid"></div>
+
+  <div class="bib-subir reveal">
+    <div>
+      <h3>Comparte tu PDF</h3>
+      <p>¿Tienes una separata, un examen resuelto o apuntes que ayudarían a otros? Cuéntanos de qué se trata y te escribiremos por WhatsApp para que nos envíes el archivo. La directiva lo revisa y lo publica aquí.</p>
+    </div>
+    <form id="bibForm" onsubmit="bibEnviar(event)">
+      <input id="bibNombre" placeholder="Tu nombre completo *" required>
+      <input id="bibTitulo" placeholder="Título del documento *" required>
+      <input id="bibCurso" placeholder="Curso o tema (Ej. Análisis Real)">
+      <select id="bibTipo"></select>
+      <input id="bibEnlace" type="url" placeholder="Enlace de Drive (opcional)">
+      <button class="btn-primary" type="submit">Enviar por WhatsApp</button>
+    </form>
+  </div>
+
+<script>
+  const BIB_WA = '51966956499'; // 👈 Número de WhatsApp de la directiva (con código de país)
+  const BIB_CATS = ['Análisis','Álgebra y Geometría','Física','Probabilidad y Estadística','Computación','Exámenes','Libros','Otros'];
+  /* 📝 AGREGA TUS PDFs AQUÍ (uno por línea). Ejemplo:
+     { titulo:'Separata de Sucesiones', curso:'Análisis Real', cat:'Análisis', autor:'Nombre', anio:2026, archivo:'assets/pdfs/sucesiones.pdf' }, */
+  const PDFS = [
+  ];
+  (function(){
+    const grid=document.getElementById('bibGrid'), fil=document.getElementById('bibFiltro'), q=document.getElementById('bibBuscar');
+    const esc=t=>String(t??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+    let cat='Todos';
+    function pintaFiltro(){
+      fil.innerHTML=['Todos',...BIB_CATS].map(c=>`<button type="button" class="filtro-btn${c===cat?' activo':''}" data-c="${esc(c)}">${esc(c)}</button>`).join('');
+    }
+    function pinta(){
+      const t=q.value.trim().toLowerCase();
+      const v=PDFS.filter(p=>(cat==='Todos'||p.cat===cat)&&(!t||[p.titulo,p.curso,p.autor].join(' ').toLowerCase().includes(t)));
+      grid.innerHTML=v.length?v.map(p=>`<article class="bib-card">
+        <span class="bib-cat">📄 ${esc(p.cat)}${p.anio?' · '+esc(p.anio):''}</span>
+        <h3>${esc(p.titulo)}</h3>
+        <p>${esc(p.curso||'')}${p.autor?(p.curso?' · ':'')+esc(p.autor):''}</p>
+        <div class="bib-acc"><a href="${esc(p.archivo)}" target="_blank" rel="noopener">Ver PDF →</a><a href="${esc(p.archivo)}" download>Descargar</a></div>
+      </article>`).join(''):
+      `<div class="bib-vacio">${PDFS.length?'No hay resultados para tu búsqueda.':'Aún no hay PDFs publicados. ¡Sé la primera persona en compartir uno!'}</div>`;
+    }
+    fil.addEventListener('click',e=>{const b=e.target.closest('.filtro-btn');if(!b)return;cat=b.dataset.c;pintaFiltro();pinta()});
+    q.addEventListener('input',pinta);
+    document.getElementById('bibTipo').innerHTML=BIB_CATS.map(c=>`<option>${esc(c)}</option>`).join('');
+    pintaFiltro();pinta();
+  })();
+  function bibEnviar(e){
+    e.preventDefault();
+    const g=id=>document.getElementById(id).value.trim();
+    const texto=`*CEFM: Quiero compartir un PDF*\n*Nombre:* ${g('bibNombre')}\n*Título:* ${g('bibTitulo')}\n*Curso/tema:* ${g('bibCurso')||'No especificado'}\n*Categoría:* ${g('bibTipo')}\n*Enlace:* ${g('bibEnlace')||'Lo adjunto en este chat'}`;
+    window.open(`https://wa.me/${BIB_WA}?text=${encodeURIComponent(texto)}`,'_blank');
+  }
+</script>
+</section>
+
+
+<section id="comunicados">
+  <div class="reveal">
+    <p class="section-label">Transparencia</p>
+    <h2 class="section-title">Comunicados & Documentos</h2>
+    <div class="divider"></div>
+  </div>
+  <div class="comunicados-list">
+    <a href="#" class="comunicado-item reveal">
+      <div class="com-icon">📢</div>
+      <div class="com-body"><div class="com-meta"><span class="com-tipo">Comunicado</span><span class="com-fecha">Mes 2026</span></div>
+        <strong>Título del comunicado (ejemplo)</strong><small>Reemplaza el enlace por el PDF: href="assets/comunicado.pdf".</small></div>
+      <div class="com-arrow">→</div>
+    </a>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     CONTACTO
+     ============================================================ -->
+<section id="contacto" style="padding:0; background:#111518;">
+
+<style>
+  .cx-root { background:#111518; padding:5rem 0 4rem; font-family:'Barlow',sans-serif; }
+  .cx-wrap { max-width:1100px; margin:0 auto; padding:0 6%; }
+  .cx-label { font-size:.65rem; letter-spacing:.45em; text-transform:uppercase; color:#C9922B; margin-bottom:.75rem; }
+  .cx-title { font-family:'Bebas Neue',sans-serif; font-size:clamp(2.5rem,6vw,4.5rem); color:#F4F1EC; line-height:1; margin-bottom:.4rem; }
+  .cx-title span { color:transparent; -webkit-text-stroke:2px #C9922B; }
+  .cx-divider { width:50px; height:3px; background:linear-gradient(90deg,#C9922B,#E05A1C); margin:1.2rem 0 2.5rem; }
+  .cx-grid { display:grid; grid-template-columns:1fr 1.35fr; gap:3rem; align-items:start; }
+  .cx-tagline { font-size:.9rem; color:#8A9BAD; line-height:1.7; margin-bottom:2.5rem; font-weight:300; }
+  .cx-dato-grid { display:grid; grid-template-columns:1fr 1fr; gap:.9rem; margin-bottom:2rem; }
+  .cx-dato { background:#1C2128; border:1px solid rgba(201,146,43,.15); border-radius:4px; padding:1.1rem 1rem; display:flex; flex-direction:column; gap:.35rem; transition:border-color .25s,background .25s; }
+  .cx-dato:hover { border-color:rgba(201,146,43,.45); background:#222a33; }
+  .cx-dato-icon { font-size:1.2rem; margin-bottom:.2rem; }
+  .cx-dato strong { font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; color:#C9922B; font-weight:700; }
+  .cx-dato span { font-size:.8rem; color:#8A9BAD; line-height:1.4; }
+  .cx-horario { display:flex; align-items:center; gap:1rem; padding:.9rem 1.2rem; background:rgba(201,146,43,.07); border-left:3px solid #C9922B; border-radius:0 4px 4px 0; margin-bottom:2rem; }
+  .cx-horario-dot { width:9px; height:9px; border-radius:50%; background:#4caf50; box-shadow:0 0 0 3px rgba(76,175,80,.25); flex-shrink:0; animation:pulse-dot 2s ease-in-out infinite; }
+  @keyframes pulse-dot { 0%,100%{box-shadow:0 0 0 3px rgba(76,175,80,.25);}50%{box-shadow:0 0 0 6px rgba(76,175,80,.1);} }
+  .cx-horario-text strong { color:#F4F1EC; font-weight:600; display:block; font-size:.8rem; }
+  .cx-horario-text p { font-size:.78rem; color:#8A9BAD; margin:0; }
+  .cx-redes { display:flex; gap:.6rem; flex-wrap:wrap; }
+  .cx-red { width:40px; height:40px; border-radius:50%; border:1px solid rgba(201,146,43,.25); background:#1C2128; display:flex; align-items:center; justify-content:center; font-size:.9rem; color:#8A9BAD; transition:all .25s; text-decoration:none; }
+  .cx-red:hover { border-color:#C9922B; background:rgba(201,146,43,.1); color:#C9922B; transform:translateY(-3px); }
+  .cx-form-wrap { background:#1C2128; border:1px solid rgba(201,146,43,.18); border-radius:6px; padding:2.5rem; position:relative; overflow:hidden; }
+  .cx-form-wrap::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,#C9922B,#E05A1C,#C9922B); background-size:200% 100%; animation:shimmer 3s linear infinite; }
+  @keyframes shimmer { 0%{background-position:0 0;}100%{background-position:200% 0;} }
+  .cx-form-title { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; color:#F4F1EC; letter-spacing:.08em; margin-bottom:.3rem; }
+  .cx-form-sub { font-size:.78rem; color:#8A9BAD; margin-bottom:1.8rem; }
+  .cx-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  .cx-field { margin-bottom:1.1rem; }
+  .cx-field label { display:block; font-size:.65rem; letter-spacing:.18em; text-transform:uppercase; color:#8A9BAD; margin-bottom:.4rem; font-weight:600; }
+  .cx-field input, .cx-field textarea, .cx-field select { width:100%; padding:.75rem 1rem; background:#111518; border:1px solid rgba(255,255,255,.1); border-radius:3px; color:#F4F1EC; font-family:'Barlow',sans-serif; font-size:.88rem; outline:none; transition:border-color .2s,box-shadow .2s; }
+  .cx-field input:focus, .cx-field textarea:focus, .cx-field select:focus { border-color:#C9922B; box-shadow:0 0 0 3px rgba(201,146,43,.1); }
+  .cx-field input::placeholder, .cx-field textarea::placeholder { color:#3A4A56; }
+  .cx-field textarea { min-height:110px; resize:vertical; }
+  .cx-field select { appearance:none; cursor:pointer; }
+  .cx-field select option { background:#1C2128; }
+  .cx-btn { width:100%; padding:.95rem; background:linear-gradient(90deg,#C9922B,#E05A1C); color:#0A0A0A; font-weight:700; font-size:.85rem; letter-spacing:.15em; text-transform:uppercase; border:none; border-radius:3px; cursor:pointer; transition:opacity .2s,transform .2s; margin-top:.5rem; }
+  .cx-btn:hover { opacity:.9; transform:translateY(-1px); }
+  .cx-success { display:none; text-align:center; padding:2rem 1rem; }
+  .cx-success-icon { width:64px; height:64px; border-radius:50%; background:rgba(76,175,80,.1); border:2px solid #4caf50; margin:0 auto 1rem; display:flex; align-items:center; justify-content:center; font-size:1.8rem; }
+  .cx-success h4 { font-family:'Bebas Neue',sans-serif; font-size:1.6rem; color:#F4F1EC; letter-spacing:.08em; margin-bottom:.5rem; }
+  .cx-success p { font-size:.85rem; color:#8A9BAD; }
+  @media(max-width:860px){ .cx-grid{grid-template-columns:1fr;} .cx-row{grid-template-columns:1fr;} }
+  @media(max-width:480px){ .cx-dato-grid{grid-template-columns:1fr;} .cx-form-wrap{padding:1.8rem 1.4rem;} }
+</style>
+
+<div class="cx-root">
+  <div class="cx-wrap">
+    <p class="cx-label">Escríbenos</p>
+    <h2 class="cx-title">CONTACTO <span>&</span> CONSULTAS</h2>
+    <div class="cx-divider"></div>
+
+    <div class="cx-grid">
+      <!-- INFO -->
+      <div>
+        <p class="cx-tagline">¿Tienes preguntas, sugerencias o deseas colaborar con el CEFM? Estamos aquí para ayudarte. Escríbenos y te responderemos a la brevedad.</p>
+
+        <div class="cx-dato-grid">
+          <div class="cx-dato">
+            <div class="cx-dato-icon">📍</div>
+            <strong>Dirección</strong>
+            <span>Independencia 1217, Ayacucho</span>
+          </div>
+          <div class="cx-dato">
+            <div class="cx-dato-icon">📧</div>
+            <strong>Correo</strong>
+            <span>eduard.cabrera.26@unsch.edu.pe</span>
+          </div>
+          <div class="cx-dato">
+            <div class="cx-dato-icon">📱</div>
+            <strong>WhatsApp</strong>
+            <span>+51 966 956 499</span>
+          </div>
+          <div class="cx-dato">
+            <div class="cx-dato-icon">🏛️</div>
+            <strong>Facultad</strong>
+            <span>FIMGC · UNSCH</span>
+          </div>
+        </div>
+
+        <div class="cx-horario">
+          <div class="cx-horario-dot"></div>
+          <div class="cx-horario-text">
+            <strong>Atención</strong>
+            <p>Lunes a viernes &nbsp;|&nbsp; 8:00 AM a 6:00 PM</p>
+          </div>
+        </div>
+
+        <div class="cx-redes">
+          <a href="https://www.facebook.com/CienciasFisicoMatematicas/" class="cx-red" target="_blank" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+          <a href="https://wa.me/51966956499" class="cx-red" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+
+      <!-- FORMULARIO -->
+      <div class="cx-form-wrap">
+        <div id="cx-form-body">
+          <p class="cx-form-title">Envíanos un mensaje</p>
+          <p class="cx-form-sub">Responderemos en menos de 24 horas hábiles.</p>
+          <form id="cxForm" onsubmit="cxEnviar(event)">
+            <div class="cx-row">
+              <div class="cx-field">
+                <label>Nombre *</label>
+                <input type="text" placeholder="Tu nombre" required>
+              </div>
+              <div class="cx-field">
+                <label>Apellidos *</label>
+                <input type="text" placeholder="Tus apellidos" required>
+              </div>
+            </div>
+            <div class="cx-field">
+              <label>Correo electrónico *</label>
+              <input type="email" placeholder="tu@correo.com" required>
+            </div>
+            <div class="cx-field">
+              <label>Motivo de consulta</label>
+              <select>
+                <option value="">Selecciona una opción...</option>
+                <option>Consulta académica</option>
+                <option>Convenios y prácticas</option>
+                <option>Eventos y actividades</option>
+                <option>Representación estudiantil</option>
+                <option>Otro</option>
+              </select>
+            </div>
+            <div class="cx-field">
+              <label>Mensaje *</label>
+              <textarea placeholder="Cuéntanos en qué podemos ayudarte..." required></textarea>
+            </div>
+            <button type="submit" class="cx-btn" id="cxBtn">
+              <i class="fab fa-whatsapp" style="font-size:1.1rem; margin-right:.5rem;"></i>
+              Enviar
+            </button>
+          </form>
+        </div>
+        <div class="cx-success" id="cx-success">
+          <div class="cx-success-icon">✅</div>
+          <h4>¡Mensaje Enviado!</h4>
+          <p>Gracias por contactarnos. Te responderemos pronto a tu correo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function cxEnviar(e) {
+    e.preventDefault();
+
+    // ── NÚMERO DEL PRESIDENTE (con código de país, sin + ni espacios)
+    const NUMERO_WA = '51966956499'; // 👈 Cambia por el número real
+
+    // ── Capturar los datos del formulario
+    const campos   = e.target.querySelectorAll('input, textarea, select');
+    const nombre   = campos[0].value.trim();
+    const apellido = campos[1].value.trim();
+    const correo   = campos[2].value.trim();
+    const motivo   = campos[3].value || 'No especificado';
+    const mensaje  = campos[4].value.trim();
+
+    // ── Fecha y hora peruana
+    const ahora = new Date().toLocaleString('es-PE', {
+      weekday: 'long',
+      year:    'numeric',
+      month:   'long',
+      day:     'numeric',
+      hour:    '2-digit',
+      minute:  '2-digit'
+    });
+
+    // ── Mensaje profesional
+    const texto =
+  `*CEFM: Centro de Estudiantes de Ciencias Físico Matemáticas*
+  *Universidad Nacional de San Cristóbal de Huamanga*
+  *Ayacucho, Perú*
+
+  *Nuevo mensaje recibido desde el sitio web oficial.*
+
+  *Remitente*
+  Nombre:   ${nombre} ${apellido}
+  Correo:   ${correo}
+  Motivo:   ${motivo}
+
+  *Contenido del mensaje*
+  ${mensaje}
+
+  *Fecha de envío:* ${ahora}
+  *Canal:* Formulario web oficial`;
+
+    // ── Feedback visual
+    const btn = document.getElementById('cxBtn');
+    btn.textContent = 'Abriendo WhatsApp...';
+    btn.disabled = true;
+
+    setTimeout(() => {
+      document.getElementById('cx-form-body').style.display = 'none';
+      document.getElementById('cx-success').style.display   = 'block';
+
+      const url = `https://wa.me/${NUMERO_WA}?text=${encodeURIComponent(texto)}`;
+      window.open(url, '_blank');
+    }, 1000);
+  }
+</script>
+
+</section>
+
+
+<!-- ============================================================
+     FOOTER
+     ============================================================ -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-brand-name">CEFM UNSCH</div>
+      <!--
+      📝 TEXTO DEL FOOTER
+      Edita la descripción del footer.
+      -->
+      <p>
+        Centro de Estudiantes de Ciencias Físico Matemáticas de la Universidad Nacional
+        de San Cristóbal de Huamanga. Ayacucho, Perú.
+        Formando mentes críticas para la ciencia y la sociedad.
+      </p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Navegación</h4>
+      <ul>
+        <li><a href="#sobre">Nosotros</a></li>
+        <li><a href="#noticias">Noticias</a></li>
+        <li><a href="#eventos">Eventos</a></li>
+        <li><a href="#logros">Logros</a></li>
+        <li><a href="#asesorias">Asesorías</a></li>
+        <li><a href="#biblioteca">Biblioteca</a></li>
+        <li><a href="#galeria">Galería</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Información</h4>
+      <ul>
+        <li><a href="#directiva">Directiva 2026-2027</a></li>
+        <li><a href="#carrera">La Carrera</a></li>
+        <li><a href="#universidad">UNSCH</a></li>
+        <li><a href="#comunicados">Documentos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Redes Sociales</h4>
+      <ul>
+        <a href="https://www.facebook.com/CienciasFisicoMatematicas/" class="red-btn" target="_blank">
+            <i class="fab fa-facebook-f"></i> Facebook
+        </a>
+        <a href="https://wa.me/51966956499" class="red-btn" target="_blank">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+        </a>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 <span>CEFM UNSCH</span>. Todos los derechos reservados.</p>
+    <p>Hecho con ❤️ por los estudiantes de <span>Ciencias Físico Matemáticas</span></p>
+  </div>
+</footer>
+
+
+<!-- Botón scroll top -->
+<button id="scroll-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Volver arriba">↑</button>
+
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+  /* ── PRELOADER ─────────────────────────────────────── */
+  window.addEventListener('load', () => {
+    setTimeout(() => {
+      document.getElementById('preloader').classList.add('hidden');
+    }, 2500);
+  });
+
+  /* ── HAMBURGER MENU ────────────────────────────────── */
+  const ham = document.getElementById('hamburger');
+  const mob = document.getElementById('mobileMenu');
+  ham.addEventListener('click', () => {
+    ham.classList.toggle('active');
+    mob.classList.toggle('open');
+  });
+  function closeMobile() {
+    ham.classList.remove('active');
+    mob.classList.remove('open');
+  }
+
+  /* ── SCROLL: REVEAL + SCROLL-TOP + NAV ─────────────── */
+  const scrollTopBtn = document.getElementById('scroll-top');
+  const revealEls    = document.querySelectorAll('.reveal');
+
+  function onScroll() {
+    // Scroll top button
+    scrollTopBtn.classList.toggle('visible', window.scrollY > 400);
+
+    // Reveal on scroll
+    revealEls.forEach(el => {
+      const top = el.getBoundingClientRect().top;
+      if (top < window.innerHeight - 80) el.classList.add('visible');
+    });
+  }
+
+  window.addEventListener('scroll', onScroll);
+  onScroll(); // Run once on load
+
+  /* ── FORMULARIO DE CONTACTO ────────────────────────── */
+  function enviarFormulario(e) {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    const msg = document.getElementById('formMsg');
+    btn.textContent = 'Enviando...';
+    btn.disabled = true;
+
+    /*
+    📝 INTEGRACIÓN CON FORMSPREE
+    Para que el formulario envíe correos reales:
+      1. Ve a formspree.io y crea una cuenta gratuita
+      2. Crea un nuevo formulario y copia el ID (ej: xpzgkwda)
+      3. Reemplaza 'TU_FORM_ID' en la línea de abajo
+      4. Descomenta el bloque fetch()
+    */
+
+    // --- SIMULACIÓN (quitar cuando uses Formspree) ---
+    setTimeout(() => {
+      btn.textContent = '✅ Enviado';
+      msg.style.display = 'block';
+      e.target.reset();
+      setTimeout(() => {
+        btn.textContent = 'Enviar Mensaje ✉️';
+        btn.disabled = false;
+        msg.style.display = 'none';
+      }, 4000);
+    }, 1500);
+
+    /* --- CON FORMSPREE (descomentar para activar) ---
+    fetch('https://formspree.io/f/TU_FORM_ID', {
+      method: 'POST',
+      body: new FormData(e.target),
+      headers: { 'Accept': 'application/json' }
+    }).then(res => {
+      if (res.ok) {
+        btn.textContent = '✅ Enviado';
+        msg.style.display = 'block';
+        e.target.reset();
+      } else {
+        btn.textContent = '❌ Error. Intenta de nuevo';
+      }
+      btn.disabled = false;
+    }).catch(() => {
+      btn.textContent = '❌ Error. Intenta de nuevo';
+      btn.disabled = false;
+    });
+    */
+  }
+
+  /* ── ASESORÍAS: FILTRO DE CURSOS ──────────────────────── */
+  function filtrarCursos(cat, tabEl) {
+    // Actualizar tab activo
+    document.querySelectorAll('.curso-tab').forEach(t => t.classList.remove('active'));
+    tabEl.classList.add('active');
+
+    // Mostrar/ocultar tarjetas
+    document.querySelectorAll('.curso-card').forEach(card => {
+      if (cat === 'todos' || card.dataset.cat === cat) {
+        card.classList.add('visible');
+      } else {
+        card.classList.remove('visible');
+      }
+    });
+  }
+
+  /* ── ASESORÍAS: MODAL ─────────────────────────────────── */
+  let _cursoActual = '';
+
+  function abrirModalAsesoria(nombre) {
+    _cursoActual  = nombre;
+    document.getElementById('modalCursoNombre').textContent = nombre;
+    document.getElementById('asesoriaModal').classList.add('open');
+    document.getElementById('asesoriaForm').reset();
+  }
+
+  function cerrarModalAsesoria(e) {
+    if (e.target === document.getElementById('asesoriaModal')) {
+      document.getElementById('asesoriaModal').classList.remove('open');
+    }
+  }
+
+  function enviarSolicitudAsesoria(e) {
+    e.preventDefault();
+
+    // ── Número WhatsApp del CEFM (cámbialo si es necesario)
+    const NUMERO_WA = '51966956499'; // 👈 Cambia por el número real
+
+    const nombre    = document.getElementById('asfNombre').value.trim();
+    const telefono  = document.getElementById('asfTelefono').value.trim();
+    const carrera   = document.getElementById('asfCarrera').value.trim() || 'No especificada';
+    const modalidad = document.getElementById('asfModalidad').value;
+    const tipo      = document.getElementById('asfTipo').value;
+
+    const texto =
+  `*CEFM: Solicitud de Asesoría*
+  *Universidad Nacional de San Cristóbal de Huamanga*
+
+  *Curso solicitado:* ${_cursoActual}
+
+  *Datos del estudiante*
+  Nombre:     ${nombre}
+  WhatsApp:   ${telefono}
+  Carrera:    ${carrera}
+  Modalidad:  ${modalidad}
+  Tipo:       ${tipo}
+
+  _Mensaje enviado desde el sitio web oficial del CEFM._`;
+
+    window.open(`https://wa.me/${NUMERO_WA}?text=${encodeURIComponent(texto)}`, '_blank');
+    document.getElementById('asesoriaModal').classList.remove('open');
+  }
+
+  /* ── MODAL DE TAGS / CARRERA ─────────────────────────── */
+  const TAGS_DATA = {
+    'Análisis Matemático': { icon: '∫', sub: 'Límites y continuidad', desc: 'Estudio riguroso del cálculo y sus fundamentos.', items: ['Sucesiones y series', 'Continuidad y derivadas', 'Integral de Riemann', 'Análisis en R^n'] },
+    'Álgebra y Geometría': { icon: '🔢', sub: 'Estructuras y espacios', desc: 'Álgebra lineal, estructuras algebraicas y geometría.', items: ['Espacios vectoriales', 'Grupos, anillos y cuerpos', 'Geometría analítica y diferencial', 'Topología básica'] },
+    'Física Clásica': { icon: '⚙️', sub: 'Mecánica y electromagnetismo', desc: 'Principios que describen el movimiento, la energía y los campos.', items: ['Mecánica newtoniana y lagrangiana', 'Termodinámica', 'Electromagnetismo', 'Ondas y óptica'] },
+    'Física Moderna': { icon: '⚛️', sub: 'Relatividad y cuántica', desc: 'Los fundamentos de la física del siglo XX.', items: ['Relatividad especial', 'Mecánica cuántica', 'Física atómica y nuclear', 'Introducción a la materia condensada'] },
+    'Probabilidad y Estadística': { icon: '📊', sub: 'Azar e inferencia', desc: 'Modelos probabilísticos y análisis de datos.', items: ['Variables aleatorias', 'Distribuciones y límites', 'Inferencia estadística', 'Regresión y modelos lineales'] },
+    'Computación Científica': { icon: '💻', sub: 'Cálculo numérico', desc: 'Programación y métodos numéricos para resolver problemas científicos.', items: ['Python y Octave', 'Métodos numéricos', 'Simulación y visualización', 'Tipografía científica con LaTeX'] }
+  };
+
+  function abrirTagModal(nombre) {
+    const d = TAGS_DATA[nombre];
+    if (!d) return;
+    document.getElementById('tagModalIcon').textContent  = d.icon;
+    document.getElementById('tagModalTitulo').textContent = nombre;
+    document.getElementById('tagModalSub').textContent   = d.sub;
+    document.getElementById('tagModalDesc').textContent  = d.desc;
+    const ul = document.getElementById('tagModalLista');
+    ul.innerHTML = d.items.map(i => `<li>${i}</li>`).join('');
+    document.getElementById('tagModal').classList.add('open');
+  }
+
+  function cerrarTagModal(e) {
+    if (e.target === document.getElementById('tagModal'))
+      document.getElementById('tagModal').classList.remove('open');
+  }
+
+  /* ════════════════════════════════════════════════════════════
+     ⚙️ FUNCIONES AUTOMÁTICAS · NO ES NECESARIO MODIFICAR NADA AQUÍ
+     Lo que sigue hace funcionar solo: el acomodo de la galería,
+     el visor de fotos y los filtros por año de Logros y Galería.
+     Para agregar contenido, edita las secciones del HTML
+     (cada una tiene sus instrucciones al inicio).
+     ════════════════════════════════════════════════════════════ */
+
+  /* ── GALERÍA: PROPORCIÓN DE CADA FOTO Y CANTIDAD POR EVENTO ── */
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('#galeria .galeria-fotos img').forEach(foto => {
+      const ajustar = () => {
+        if (foto.naturalWidth && foto.naturalHeight)
+          foto.style.setProperty('--r', foto.naturalWidth / foto.naturalHeight);
+      };
+      if (foto.complete) ajustar();
+      foto.addEventListener('load', ajustar);
+      foto.tabIndex = 0;
+      foto.setAttribute('role', 'button');
+    });
+
+    document.querySelectorAll('#galeria .galeria-evento').forEach(evento => {
+      const n = evento.querySelectorAll('.galeria-fotos img').length;
+      const etiqueta = document.createElement('span');
+      etiqueta.className = 'galeria-evento-cantidad';
+      etiqueta.textContent = n + (n === 1 ? ' foto' : ' fotos');
+      evento.querySelector('.galeria-evento-cabecera').appendChild(etiqueta);
+    });
+  });
+
+  /* ── VISOR DE FOTOS DE LA GALERÍA ── */
+  document.addEventListener('DOMContentLoaded', function () {
+    const galeria = document.getElementById('galeria');
+    const box     = document.getElementById('lightbox');
+    const img     = document.getElementById('lightboxImg');
+    const texto   = document.getElementById('lightboxTexto');
+    const contador = document.getElementById('lightboxContador');
+    let fotos = [];
+    let actual = 0;
+
+    // Solo recorre las fotos visibles (las del año filtrado)
+    function abrirDesde(foto) {
+      const visibles = Array.from(galeria.querySelectorAll('.galeria-evento:not(.oculto) .galeria-fotos img'));
+      fotos = visibles.map(el => ({
+        src: el.currentSrc || el.src,
+        desc: el.alt || el.closest('.galeria-evento').querySelector('.galeria-evento-titulo').textContent.trim()
+      }));
+      abrir(visibles.indexOf(foto));
+    }
+
+    function mostrar(i) {
+      actual = (i + fotos.length) % fotos.length;
+      img.src = fotos[actual].src;
+      img.alt = fotos[actual].desc;
+      texto.textContent = fotos[actual].desc;
+      contador.textContent = (actual + 1) + ' / ' + fotos.length;
+    }
+
+    function abrir(i) {
+      mostrar(i);
+      box.classList.add('open');
+      box.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function cerrar() {
+      box.classList.remove('open');
+      box.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+    }
+
+    galeria.addEventListener('click', e => {
+      const foto = e.target.closest('.galeria-fotos img');
+      if (foto) abrirDesde(foto);
+    });
+    galeria.addEventListener('keydown', e => {
+      const foto = e.target.closest('.galeria-fotos img');
+      if (foto && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); abrirDesde(foto); }
+    });
+    document.getElementById('lightboxCerrar').addEventListener('click', cerrar);
+    document.getElementById('lightboxPrev').addEventListener('click', () => mostrar(actual - 1));
+    document.getElementById('lightboxNext').addEventListener('click', () => mostrar(actual + 1));
+    box.addEventListener('click', e => { if (e.target === box) cerrar(); });
+
+    document.addEventListener('keydown', e => {
+      if (!box.classList.contains('open')) return;
+      if (e.key === 'Escape')     cerrar();
+      if (e.key === 'ArrowLeft')  mostrar(actual - 1);
+      if (e.key === 'ArrowRight') mostrar(actual + 1);
+    });
+
+    // Deslizar con el dedo en celular
+    let inicioX = null;
+    box.addEventListener('touchstart', e => { inicioX = e.touches[0].clientX; }, { passive: true });
+    box.addEventListener('touchend', e => {
+      if (inicioX === null) return;
+      const dx = e.changedTouches[0].clientX - inicioX;
+      if (Math.abs(dx) > 50) mostrar(actual + (dx < 0 ? 1 : -1));
+      inicioX = null;
+    });
+  });
+
+  /* ── FILTRO POR AÑO (se usa en Logros y en Galería) ──
+     Lee el año escrito en cada elemento y crea solo los botones:
+     los 3 años más recientes, "Años anteriores ▾" y "Todos". */
+  function crearFiltroPorAnio(filtro, cards, leerTexto) {
+    if (!filtro || !cards.length) return;
+
+    cards.forEach(card => {
+      const m = (leerTexto(card) || '').match(/\b(19|20)\d{2}\b/);
+      card.dataset.anio = m ? m[0] : '';
+    });
+
+    const anios = [...new Set(cards.map(c => c.dataset.anio).filter(Boolean))]
+      .sort((a, b) => b - a);
+    if (!anios.length) return;
+
+    const RECIENTES = 3; // cuántos años se muestran como botón
+    const recientes = anios.slice(0, RECIENTES);
+    const anteriores = anios.slice(RECIENTES);
+    let selector = null;
+
+    function filtrar(anio, control) {
+      filtro.querySelectorAll('.filtro-btn').forEach(b => {
+        b.classList.toggle('activo', b === control);
+        if (b.tagName === 'BUTTON') b.setAttribute('aria-pressed', b === control);
+      });
+      if (selector && control !== selector) selector.value = '';
+      cards.forEach(card => {
+        const mostrar = anio === 'todos' || card.dataset.anio === anio;
+        card.classList.toggle('oculto', !mostrar);
+        card.classList.remove('aparecer');
+        if (mostrar) {
+          card.classList.add('visible');
+          void card.offsetWidth; // reinicia la animación
+          card.classList.add('aparecer');
+        }
+      });
+    }
+
+    function crearBoton(anio, texto) {
+      const btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'filtro-btn';
+      btn.textContent = texto;
+      btn.addEventListener('click', () => filtrar(anio, btn));
+      filtro.appendChild(btn);
+      return btn;
+    }
+
+    // Botones de los años más recientes
+    const primerBoton = crearBoton(recientes[0], recientes[0]);
+    recientes.slice(1).forEach(anio => crearBoton(anio, anio));
+
+    // Años antiguos en un menú desplegable (solo si existen)
+    if (anteriores.length) {
+      selector = document.createElement('select');
+      selector.className = 'filtro-btn filtro-select';
+      selector.setAttribute('aria-label', 'Años anteriores');
+      selector.innerHTML = '<option value="">Años anteriores ▾</option>' +
+        anteriores.map(a => `<option value="${a}">${a}</option>`).join('');
+      selector.addEventListener('change', () => {
+        if (selector.value) filtrar(selector.value, selector);
+      });
+      filtro.appendChild(selector);
+    }
+
+    crearBoton('todos', 'Todos');
+
+    // Al cargar se muestra el año más reciente
+    filtrar(recientes[0], primerBoton);
+  }
+
+  document.addEventListener('DOMContentLoaded', function () {
+    const texto = el => el ? el.textContent : '';
+
+    crearFiltroPorAnio(
+      document.getElementById('logrosFiltro'),
+      Array.from(document.querySelectorAll('#logros .logro-card')),
+      card => texto(card.querySelector('.logro-año'))
+    );
+
+    crearFiltroPorAnio(
+      document.getElementById('galeriaFiltro'),
+      Array.from(document.querySelectorAll('#galeria .galeria-evento')),
+      evento => texto(evento.querySelector('.galeria-evento-titulo'))
+    );
+  });
+</script>
+
+<!-- ════════ VISOR DE FOTOS (LIGHTBOX) ════════
+     ⚙️ No tocar. Se abre solo al hacer clic en una foto de la galería
+     y muestra el texto que tenga en alt="..." -->
+
+
+<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Visor de fotos">
+  <button class="lightbox-btn lightbox-close" id="lightboxCerrar" aria-label="Cerrar"><i class="fa-solid fa-xmark"></i></button>
+  <button class="lightbox-btn lightbox-prev" id="lightboxPrev" aria-label="Foto anterior"><i class="fa-solid fa-chevron-left"></i></button>
+  <figure class="lightbox-figure">
+    <img class="lightbox-img" id="lightboxImg" src="" alt="">
+    <figcaption class="lightbox-caption">
+      <span id="lightboxTexto"></span>
+      <span class="lightbox-counter" id="lightboxContador"></span>
+    </figcaption>
+  </figure>
+  <button class="lightbox-btn lightbox-next" id="lightboxNext" aria-label="Foto siguiente"><i class="fa-solid fa-chevron-right"></i></button>
+</div>
+
+</body>
+</html>
